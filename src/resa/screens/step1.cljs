@@ -6,7 +6,8 @@
 
 (defc screen1
   [store]
-  (let [{:keys [pax time name phone email]} (:data @store)]
+  (let [{:keys [pax time name phone email]} (:data @store)
+        format "HH:mm"]
     [:div
      [:br]
      (ant/input
@@ -19,6 +20,10 @@
         :on-change #(swap! store assoc-in [:data :pax]
                            (-> % .-target .-value))})
      [:br]
+
+     (ant/date-picker {:style {:margin 5}})
+
+     (ant/time-picker {:format format :minute-step 15})
 
      (ant/input
        {:type "datetime-local"
