@@ -6,7 +6,7 @@
    [resa.store :refer [app-store]]
    resa.actions.core
    [resa.screens.core :refer [ui-screen]]
-   [reaction.core :refer-macros [dispatch!]])
+   [reaction.core :refer [bind-actions-list]])
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 
@@ -50,6 +50,8 @@
       (.render js/ReactDOM (ui-app app-store) node))))
 
 (main)
+
+(bind-actions-list)
 
 ;; remember to run lein figwheel and then browse to
 ;; /cards.html

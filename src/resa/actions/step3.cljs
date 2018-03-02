@@ -1,5 +1,5 @@
 (ns resa.actions.step3
-  (:require-macros [reaction.core :refer [defaction defaction!]]))
+  (:require [reaction.core :refer-macros [defaction defaction!]]))
 
 (defaction h-start-again
   [m]

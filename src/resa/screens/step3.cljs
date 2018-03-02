@@ -18,15 +18,15 @@
       [:li "N. of guests: " (or pax "")]]
      [:button
       {:class "btn btn-default btn-block"
-       :on-click #(dispatch! :h-start-again store)}
+       :on-click #(dispatch! store :h-start-again)}
       "<< Start again"]
      [:button
       {:class "btn btn-default btn-block"
-       :on-click #(dispatch! :h-back-to-step2 store)}
+       :on-click #(dispatch! store :h-back-to-step2)}
       "< Back"]
      [:button
       {:class "btn btn-primary btn-block"
-       :on-click #(dispatch! :h-confirm store)
+       :on-click #(dispatch! store :h-confirm)
        :auto-focus true}
       "Confirm booking!"]
      [:br]]))

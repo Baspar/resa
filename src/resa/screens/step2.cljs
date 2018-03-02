@@ -35,6 +35,6 @@
                            (-> % .-target .-value))})
 
      [:br]
-     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! :h-back-to-step1 store)} "< Back")
-     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! :h-book store)} "Book!")
+     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! store :h-back-to-step1)} "< Back")
+     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! store :h-book)} "Book!")
      [:br]]))

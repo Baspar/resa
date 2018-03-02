@@ -15,6 +15,6 @@
      [:button
       {:class "btn btn-default btn-block"
        :auto-focus true
-       :on-click #(dispatch! :h-start-again store)}
+       :on-click #(dispatch! store :h-start-again)}
       "<< Start again"]
      [:br]]))

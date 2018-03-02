@@ -27,5 +27,5 @@
         :on-change #(swap! store assoc-in [:data :time]
                            (-> % .-target .-value))})
      [:br]
-     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! :h-next store)} "Next...")
+     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! store :h-next)} "Next...")
      [:br]]))
