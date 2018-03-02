@@ -12,9 +12,9 @@
      [:p "Dear MM. " (or name "")]
      [:p "Thank you for your reservation!"]
      [:p "A confirmation e-mail has been sent to: " (or email "")]
-     [:button
-      {:class "btn btn-default btn-block"
+     (ant/button
+      {:style {:width "100%"  :margin 5}
        :auto-focus true
        :on-click #(dispatch! store :h-start-again)}
-      "<< Start again"]
+      "<< Start again")
      [:br]]))

@@ -16,17 +16,17 @@
       [:li "E-mail: " (or email "")]
       [:li "Date/time: " (or time "")]
       [:li "N. of guests: " (or pax "")]]
-     [:button
-      {:class "btn btn-default btn-block"
+     (ant/button
+      {:style {:width "100%" :margin 5}
        :on-click #(dispatch! store :h-start-again)}
-      "<< Start again"]
-     [:button
-      {:class "btn btn-default btn-block"
+      "<< Start again")
+     (ant/button
+      {:style {:width "100%" :margin 5}
        :on-click #(dispatch! store :h-back-to-step2)}
-      "< Back"]
-     [:button
-      {:class "btn btn-primary btn-block"
+      "< Back")
+     (ant/button
+      {:style {:width "100%" :margin 5}
        :on-click #(dispatch! store :h-confirm)
        :auto-focus true}
-      "Confirm booking!"]
+      "Confirm booking!")
      [:br]]))
