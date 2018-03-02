@@ -1,11 +1,11 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
-           [reaction.core :refer-macros [dispatch!]
+            [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
-            [rum.core :as rum]]))
+            [rum.core :as rum]))
 
 (defc screen2
-  [state]
+  [store]
   (let [{:keys [pax time name phone email]} (:data @store)]
     [:div
      [:br]

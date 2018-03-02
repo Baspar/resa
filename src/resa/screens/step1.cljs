@@ -1,8 +1,8 @@
 (ns resa.screens.step1
   (:require [rum.core :refer-macros [defc]]
-            [reaction.core :refer-macros [dispatch!]
-             [antizer.rum :as ant]
-             [rum.core :as rum]]))
+            [reaction.core :refer-macros [dispatch!]]
+            [antizer.rum :as ant]
+            [rum.core :as rum]))
 
 (defc screen1
   [store]

@@ -13,22 +13,22 @@
 
 (defmethod ui-screen :step1
   [store]
-  (resa.screens.core.screen1 store))
+  (screen1 store))
 
 ;;; step2
 (defmethod ui-screen :step2
   [store]
-  (resa.screens.core.screen2 store))
+  (screen2 store))
 
 ;;; step3
 (defmethod ui-screen :step3
   [store]
-  (resa.screens.core.screen3 store))
+  (screen3 store))
 
 ;;; step4
 (defmethod ui-screen :step4
   [store]
-  (resa.screens.core.screen4 store))
+  (screen4 store))
   ;; (let [{:keys [pax time name phone email]} (:data @store)]
   ;;   (html [:div
   ;;          [:br]
