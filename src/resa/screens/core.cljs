@@ -1,8 +1,8 @@
 (ns resa.screens.core
   (:require
-    resa.screens.step1
-    resa.screens.step2
-    resa.screens.step3
+    [resa.screens.step1 :refer [screen1]]
+    [resa.screens.step2 :refer [screen2]]
+    [resa.screens.step3 :refer [screen3]]
     [antizer.rum :as ant]
     [rum.core :as rum]
     [resa.screens.step4 :refer [screen4]]
@@ -12,15 +12,18 @@
   (fn [store] (:screen @store)))
 
 (defmethod ui-screen :step1
-  [store])
+  [store]
+  (resa.screens.core.screen1 store))
 
 ;;; step2
 (defmethod ui-screen :step2
-  [store])
+  [store]
+  (resa.screens.core.screen2 store))
 
 ;;; step3
 (defmethod ui-screen :step3
-  [store])
+  [store]
+  (resa.screens.core.screen3 store))
 
 ;;; step4
 (defmethod ui-screen :step4
