@@ -1,44 +1,44 @@
 (ns resa.core
   (:require
-   cljsjs.react
-   cljsjs.react.dom
-   [sablono.core :as sab :include-macros true :refer [html]]
-   [resa.store :refer [app-store]]
-   resa.actions.core
-   [resa.screens.core :refer [ui-screen]]
-   [reaction.core :refer [bind-actions-list]])
+    cljsjs.react
+    cljsjs.react.dom
+    resa.actions.core
+    [resa.store :refer [app-store]]
+    [resa.utils :refer [wrap-en]]
+    [antizer.rum :as ant]
+    [resa.screens.core :refer [ui-screen]]
+    [reaction.core :refer [bind-actions-list]])
   (:require-macros
-   [devcards.core :as dc :refer [defcard deftest]]))
+    [devcards.core :as dc :refer [defcard deftest]]))
 
 (enable-console-print!)
 
 ;;; cards
 (defcard step1
   (fn [store _]
-    (ui-screen store))
+    (wrap-en (ui-screen store)))
   {:screen :step1}
   {:inspect-data true})
 (defcard step2
   (fn [store _]
-    (ui-screen store))
+    (wrap-en (ui-screen store)))
   {:screen :step2}
   {:inspect-data true})
 (defcard step3
   (fn [store _]
-    (ui-screen store))
+    (wrap-en (ui-screen store)))
   {:screen :step3}
   {:inspect-data true})
 (defcard step4
   (fn [store _]
-    (ui-screen store))
+    (wrap-en (ui-screen store)))
   {:screen :step4}
   {:inspect-data true})
 
 ;;; app
 (defn ui-app
   [store]
-  (html [:div
-         (ui-screen store)]))
+  (wrap-en (ui-screen store)))
 
 (defn main []
   ;; conditionally start the app based on whether the #main-app-area
@@ -52,6 +52,3 @@
 (main)
 
 (bind-actions-list)
-
-;; remember to run lein figwheel and then browse to
-;; /cards.html
