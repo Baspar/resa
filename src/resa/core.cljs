@@ -1,10 +1,11 @@
 (ns resa.core
   (:require
    [sablono.core :as sab :include-macros true :refer [html]]
-   [antizer.reagent :as ant]
-   [reagent.core :as r]
    cljsjs.react
-   cljsjs.react.dom)
+   cljsjs.react.dom
+   [resa.store :refer [app-store]]
+   resa.actions.core
+   [reaction.core :refer-macros [dispatch!]])
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 
@@ -14,11 +15,6 @@
   (fn [store] (:screen @store)))
 
 ;;; step1
-
-(defn h-next
-  [store]
-  (swap! store assoc :screen :step2))
-
 (defmethod ui-screen :step1
   [store]
   (let [{:keys [pax time name phone email]} (:data @store)]
@@ -47,21 +43,12 @@
            ;   [:div {:class "col-md-4"}
            [:button
             {:class "btn btn-primary btn-block"
-             :on-click #(h-next store)}
+             :on-click #(dispatch! :h-next store)}
             "Next..."
            ; [:div {:class "col-md-4"}]
             [:br]]])))
 
 ;;; step2
-
-(defn h-book
-  [store]
-  (swap! store assoc :screen :step3))
-
-(defn h-back-to-step1
-  [store]
-  (swap! store assoc :screen :step1))
-
 (defmethod ui-screen :step2
   [store]
   (let [{:keys [pax time name phone email]} (:data @store)]
@@ -96,28 +83,15 @@
            [:br]
            [:button
             {:class "btn btn-default btn-block"
-             :on-click #(h-back-to-step1 store)}
+             :on-click #(dispatch! :h-back-to-step1 store)}
             "< Back"]
            [:button
             {:class "btn btn-primary btn-block"
-             :on-click #(h-book store)}
+             :on-click #(dispatch! :h-book store)}
             "Book!"]
            [:br]])))
 
 ;;; step3
-
-(defn h-start-again
-  [store]
-  (swap! store assoc :screen :step1))
-
-(defn h-back-to-step2
-  [store]
-  (swap! store assoc :screen :step2))
-
-(defn h-confirm
-  [store]
-  (swap! store assoc :screen :step4))
-
 (defmethod ui-screen :step3
   [store]
   (let [data (:data @store)
@@ -132,21 +106,20 @@
             [:li "N. of guests: " (or pax "")]]
            [:button
             {:class "btn btn-default btn-block"
-             :on-click #(h-start-again store)}
+             :on-click #(dispatch! :h-start-again store)}
             "<< Start again"]
            [:button
             {:class "btn btn-default btn-block"
-             :on-click #(h-back-to-step2 store)}
+             :on-click #(dispatch! :h-back-to-step2 store)}
             "< Back"]
            [:button
             {:class "btn btn-primary btn-block"
-             :on-click #(h-confirm store)
+             :on-click #(dispatch! :h-confirm store)
              :auto-focus true}
             "Confirm booking!"]
            [:br]])))
 
 ;;; step4
-
 (defmethod ui-screen :step4
   [store]
   (let [{:keys [pax time name phone email]} (:data @store)]
@@ -158,30 +131,26 @@
            [:button
             {:class "btn btn-default btn-block"
              :auto-focus true
-             :on-click #(h-start-again store)}
+             :on-click #(dispatch! :h-start-again store)}
             "<< Start again"]
            [:br]])))
 
 ;;; cards
-
 (defcard step1
   (fn [store _]
     (ui-screen store))
   {:screen :step1}
   {:inspect-data true})
-
 (defcard step2
   (fn [store _]
     (ui-screen store))
   {:screen :step2}
   {:inspect-data true})
-
 (defcard step3
   (fn [store _]
     (ui-screen store))
   {:screen :step3}
   {:inspect-data true})
-
 (defcard step4
   (fn [store _]
     (ui-screen store))
@@ -189,9 +158,6 @@
   {:inspect-data true})
 
 ;;; app
-
-(defonce app-store (atom {:screen :step1}))
-
 (defn ui-app
   [store]
   (html [:div
