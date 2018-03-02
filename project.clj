@@ -10,9 +10,10 @@
                  [org.clojure/clojurescript "1.9.946"]
                  [cljsjs/react "15.3.1-0"]
                  [cljsjs/react-dom "15.3.1-0"]
+                 [antizer "0.2.2" :exclusions [cljsjs/antd]]
+                 [cljsjs/antd "3.2.0-0"]
                  [rum "0.11.2"]
                  [devcards "0.2.4"]
-                 [antizer "0.2.2"]
                  [reaction "0.1.2"]]
 
   :plugins [[lein-figwheel "0.5.14"]
