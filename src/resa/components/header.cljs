@@ -21,7 +21,7 @@
     (when back-button?
       (ant/button {:style {:height "4em"}
                    :on-click #(dispatch! store :go-back)}
-                  "<<"))
+                  (ant/icon {:type "double-left"})))
     [:div {:style {:font-size "0.7em"}}
      "PHOOD"]]
    [:div {:style {:color "grey"
@@ -33,8 +33,12 @@
    [:div {:style {:font-size "1.2em"
                   :font-weight "bold"}}
     (:name restaurant-info)]
-   [:div {:style {:font-size "0.7em"}} (:ratings restaurant-info)]
-   [:div {:style {:font-size "0.7em"}} (:location restaurant-info)]])
+   [:div {:style {:font-size "0.7em"}}
+    (ant/icon {:type "star"})
+    (:ratings restaurant-info)]
+   [:div {:style {:font-size "0.7em"}}
+    (ant/icon {:type "environment"})
+    (:location restaurant-info)]])
 (defc small-header
   [store]
   (header-s store true))
@@ -57,5 +61,9 @@
    [:div {:style {:font-size "2em"
                   :font-weight "bold"}}
     (:name restaurant-info)]
-   [:div {:style {:font-size "0.7em"}} (:ratings restaurant-info)]
-   [:div {:style {:font-size "0.7em"}} (:location restaurant-info)]])
+   [:div {:style {:font-size "0.7em"}}
+    (ant/icon {:type "star"})
+    (:ratings restaurant-info)]
+   [:div {:style {:font-size "0.7em"}}
+    (ant/icon {:type "environment"})
+    (:location restaurant-info)]])

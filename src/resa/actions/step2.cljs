@@ -11,7 +11,10 @@
 
 (defaction step2--set-phone
   [m event]
-  (assoc-in m [:data :phone] (.. event -target -value)))
+  (let [raw-value (.. event -target -value)
+        treated-value (-> raw-value
+                          (clojure.string/replace #"\D" ""))]
+    (assoc-in m [:data :phone] treated-value)))
 
 (defaction step2--set-email
   [m event]
