@@ -22,9 +22,9 @@
      (big-header store)
      ;; Buttons
      [:div {:style {:display "flex"}}
-      (ant/button {:style {:flex 1 :padding 5}} "Info")
-      (ant/button {:style {:flex 1 :padding 5}} "Menu")
-      (ant/button {:style {:flex 1 :padding 5}} "Review")]
+      (ant/button {:style {:flex 1 :height "4em"}} "Info")
+      (ant/button {:style {:flex 1 :height "4em"}} "Menu")
+      (ant/button {:style {:flex 1 :height "4em"}} "Review")]
      ;; Text
      [:br]
      [:div {:style {:padding 10}} "An eclectic and authentic Northern French cuisine. Superb ambiance, suitable for romantic and business dinner. Lorem ipsum  it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."]

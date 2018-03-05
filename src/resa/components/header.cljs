@@ -19,7 +19,7 @@
                   :flex-direction "row"
                   :justify-content (if back-button? "space-between" "flex-end")}}
     (when back-button?
-      (ant/button {:size "large"
+      (ant/button {:style {:height "4em"}
                    :on-click #(dispatch! store :go-back)}
                   "<<"))
     [:div {:style {:font-size "0.7em"}}
