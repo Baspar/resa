@@ -8,7 +8,7 @@
 
 (defaction go-back
   [m]
-  (update m :screen #(case %
+  (update m :screen #(case (or % :step1)
                        :step1 :step1
                        :step2 :step1
                        :step3 :step2
@@ -16,7 +16,7 @@
 
 (defaction go-forward
   [m]
-  (update m :screen #(case %
+  (update m :screen #(case (or % :step1)
                        :step1 :step2
                        :step2 :step3
                        :step3 :step4

@@ -9,7 +9,7 @@
     [reaction.core :refer-macros [dispatch!]]))
 
 (defmulti ui-screen
-  (fn [store] (:screen @store)))
+  (fn [store] (get @store :screen :step1)))
 
 (defmethod ui-screen :step1
   [store]
