@@ -15,7 +15,6 @@
   [store]
   (let [m @store
         data (get m :data {})
-        format "HH:mm"
         {:keys [pax hour minutes name phone email date]} data
         pax-valid? (and (not (empty? pax))
                         (re-matches #"\d{1,2}" pax))
@@ -37,18 +36,18 @@
                             email-valid?))
         disabledHours (fn [] (if date
                                (let [totalHours (into #{} (range 1 23))
-                                     hours (->> (get available-slot (.format date "YYYY-MM-DD"))
+                                     hours (->> (get available-slot date)
                                                 (keep (fn [[k v]]
                                                         (when (not (empty? v))
                                                           k)))
                                                 (into #{}))]
                                  (vec (clojure.set/difference totalHours hours)))
                                []))
-        disabledMinutes (fn [] (if hour
-                                 (let [totalMinute (into #{} (take-nth 15 (range 60)))
-                                       minutesAv (into #{} (get-in available-slot [(.format date "YYYY-MM-DD") (.hour hour)]))]
-                                   (vec (clojure.set/difference totalMinute minutesAv)))
-                                 []))]
+        disabledMinutes (fn [] (let [totalMinute (into #{} (take-nth 15 (range 60)))
+                                     minutesAv (into #{} (if hour
+                                                           (get-in available-slot [date hour])
+                                                           []))]
+                                 (vec (clojure.set/difference totalMinute minutesAv))))]
 
     [:div {:style {:display "flex" :flex-direction "column"}}
      ;; Header
@@ -88,22 +87,19 @@
      [:div {:style {:display "flex" :align-items "center" :margin 5}}
       (ant/icon {:type "calendar" :style {:width "6rem"}})
       (ant/date-picker {:on-change #(dispatch! store [:step2--set-date %])
-                        :value date
-                        :style {:flex 1}
+                        :value (when date (js/moment date))
+                        :style {:flex 2}
                         :disabledDate disabledDate})
-      (ant/time-picker {:on-change #(dispatch! store [:step2--set-hour %])
-                        :format "HH"
-                        :disabledHours disabledHours
-                        :disabled (not time-valid?)
-                        :style {:flex 1}
-                        :hideDisabledOptions true})
-      (ant/time-picker {:on-change #(.log js/console %)
-                        :format "mm"
+      (ant/time-picker {:on-change #(dispatch! store [:step2--set-time %])
+                        :format "HH:mm"
                         :minute-step 15
-                        :style {:flex 1}
+                        :disabledHours disabledHours
                         :disabledMinutes disabledMinutes
-                        :disabled (and (not hour-valid?)
-                                       (not time-valid?))})]
+                        :disabled (not time-valid?)
+                        ;; :value (when hour (.. js/window moment (set "hour" hour)))
+                        :value (when (and hour minutes)
+                                 (.. js/window moment (set "hour" hour) (set "minutes" minutes)))
+                        :style {:flex 1}})]
      ;; Number pax
      [:div {:style {:display "flex" :align-items "center" :margin 5}}
       (ant/icon {:type "user" :style {:width "6rem"}})

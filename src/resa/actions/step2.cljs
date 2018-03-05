@@ -26,12 +26,32 @@
 
 (defaction step2--set-date
   [m value]
-  (assoc-in m [:data :date] value))
+  (if value
+    (let [date (.format value "YYYY-MM-DD")]
+      (-> m
+          (assoc-in [:data :date] date)
+          (update :data dissoc :hour :minutes)))
+    m))
 
-(defaction step2--set-hour
+(defaction step2--set-time
   [m value]
-  (assoc-in m [:data :hour] value))
+  (if value
+    (let [old-hour (get-in m [:data :hour])
+          old-min (get-in m [:data :minutes])
+          new-hour (-> value (.format "HH") (js/parseInt))
+          new-min (-> value (.format "mm") (js/parseInt))]
+      (println "OK")
+      (cond
+        (not= old-hour new-hour) (-> m
+                                     (assoc-in [:data :hour] new-hour)
+                                     (update :data dissoc :minutes))
+        (not= old-min new-min) (assoc-in m [:data :minutes] new-min)
+        :else m))
+    m))
 
-;; (defaction step2--set-
-;;   [m event]
-;;   m)
+(defaction step2--set-minute
+  [m value]
+  (if value
+    (let [minutes (-> value (.format "mm") (js/parseInt))]
+      (assoc-in m [:data :minutes] minutes))
+    m))

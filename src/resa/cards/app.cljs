@@ -9,4 +9,4 @@
   (fn [store]
     (ui-screen store))
   {}
-  (:inspect-data true))
+  {:inspect-data true})
