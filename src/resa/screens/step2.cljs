@@ -3,12 +3,19 @@
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
             [antizer.rum :as ant]
-            [rum.core :as rum]))
+            [rum.core :as rum]
+            [resa.db :refer [available-slot ]]))
+
+(defn disabledDate
+  [current]
+  (let [data (if current (get available-slot  (.format current "YYYY-MM-DD") nil))]
+    (empty? data)))
 
 (defc screen2
   [store]
   (let [m @store
         data (get m :data {})
+        format "HH:mm"
         {:keys [pax time name phone email]} data]
     [:div {:style {:display "flex" :flex-direction "column"}}
      (small-header store)
@@ -36,6 +43,10 @@
                  :value (or email "")
                  :on-change #(swap! store assoc-in [:data :email]
                                     (.. % -target -value))})
+
+     (ant/date-picker { :disabledDate disabledDate})
+
+     (ant/time-picker {:format format :minute-step 15})
      ;; Number pax
      (ant/input {:type "number"
                  :placeholder "Number of guests"
