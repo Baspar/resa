@@ -9,10 +9,12 @@
   [store]
   (let [m @store
         data (get m :data {})
-        {:keys [pax time name phone email]} data]
+        {:keys [pax time name phone email]} data
+        disabled? false]
     [:div {:style {:display "flex" :flex-direction "column"}}
      (small-header store)
      ;; Title
+     [:br]
      [:div {:style {:display "flex" :align-items "center"}}
       (ant/select {:default-value "Mr." :on-change #(swap! store assoc-in [:data :title] %)}
                   (ant/select-option {:value "Mr."} "Mr.")
@@ -43,6 +45,9 @@
                  :value (or pax "")
                  :on-change #(swap! store assoc-in [:data :pax]
                                     (.. % -target -value))})
-     (ant/button {:style {:width "100%"}
-                  :on-click #(dispatch! store :go-forward)}
-                 "Book!")]))
+     [:br]
+     (ant/button {:style {:height "4em"}
+                  :on-click #(dispatch! store :go-forward)
+                  :type "primary"
+                  :size "large"}
+                 "REVIEW")]))
