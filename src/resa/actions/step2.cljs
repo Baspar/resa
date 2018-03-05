@@ -21,6 +21,10 @@
   [m event]
   (assoc-in m [:data :pax] (.. event -target -value)))
 
+(defaction step2--set-date
+  [m value]
+  (assoc-in m [:data :date] value))
+
 ;; (defaction step2--set-
 ;;   [m event]
 ;;   m)

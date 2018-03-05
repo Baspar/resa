@@ -16,8 +16,18 @@
   (let [m @store
         data (get m :data {})
         format "HH:mm"
-        {:keys [pax time name phone email]} data
-        disabled? false]
+        {:keys [pax time name phone email date]} data
+        disabled? false
+        time-valid? (not (nil? date))
+        disabledHours (fn [] (if date
+                               (let [ totalHours (into #{} (range 1 23))
+                                     hours (->> (get available-slot (.format date "YYYY-MM-DD"))
+                                                (keep (fn [[k v]]
+                                                        (when (not (empty? v))
+                                                          k)))
+                                                (into #{}))]
+                                 (vec (clojure.set/difference totalHours hours)))
+                               []))]
     [:div {:style {:display "flex" :flex-direction "column"}}
      (small-header store)
      ;; Title
@@ -43,9 +53,9 @@
                  :value (or email "")
                  :on-change #(dispatch! store [:step2--set-email %])})
 
-     (ant/date-picker { :disabledDate disabledDate})
+     (ant/date-picker { :on-change #(dispatch! store [:step2--set-date %])  :value date :disabledDate disabledDate})
 
-     (ant/time-picker {:format format :minute-step 15})
+     (ant/time-picker {:on-change #(.log js/console %) :format format :minute-step 15 :disabledHours disabledHours :disabled (not time-valid?) :hideDisabledOptions true})
      ;; Number pax
      (ant/input {:type "number"
                  :placeholder "Number of guests"
