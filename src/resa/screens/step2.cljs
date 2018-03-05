@@ -51,6 +51,7 @@
                                  []))]
 
     [:div {:style {:display "flex" :flex-direction "column"}}
+     ;; Header
      (small-header store)
      ;; Title
      [:br]
@@ -63,6 +64,7 @@
                   (ant/select-option {:value "Ms."} "Ms."))
       (ant/input {:placeholder "Your name"
                   :type "text"
+                  :style {:flex 1}
                   :auto-focus true
                   :value (or name "")
                   :on-change #(dispatch! store [:step2--set-name %])})]
@@ -71,6 +73,7 @@
       (ant/icon {:type "phone" :style {:width "6rem"}})
       (ant/input {:placeholder "Your phone number"
                   :type "tel"
+                  :style {:flex 1}
                   :value (or phone "")
                   :on-change #(dispatch! store [:step2--set-phone %])})]
      ;; Email
@@ -79,20 +82,25 @@
       (ant/input {:placeholder "Your e-mail"
                   :type "email"
                   :value (or email "")
+                  :style {:flex 1}
                   :on-change #(dispatch! store [:step2--set-email %])})]
+     ;; Calendar
      [:div {:style {:display "flex" :align-items "center" :margin 5}}
       (ant/icon {:type "calendar" :style {:width "6rem"}})
       (ant/date-picker {:on-change #(dispatch! store [:step2--set-date %])
                         :value date
+                        :style {:flex 1}
                         :disabledDate disabledDate})
       (ant/time-picker {:on-change #(dispatch! store [:step2--set-hour %])
                         :format "HH"
                         :disabledHours disabledHours
                         :disabled (not time-valid?)
+                        :style {:flex 1}
                         :hideDisabledOptions true})
       (ant/time-picker {:on-change #(.log js/console %)
                         :format "mm"
                         :minute-step 15
+                        :style {:flex 1}
                         :disabledMinutes disabledMinutes
                         :disabled (and (not hour-valid?)
                                        (not time-valid?))})]
@@ -102,10 +110,11 @@
       (ant/input {:type "number"
                   :placeholder "Number of guests"
                   :min 1
+                  :style {:flex 1}
                   :value (or pax "")
                   :on-change #(dispatch! store [:step2--set-pax %])})]
-     [:br]
      ;; Submit button
+     [:br]
      (ant/button {:style {:height "4em"}
                   :on-click #(dispatch! store :go-forward)
                   :disabled disabled?
