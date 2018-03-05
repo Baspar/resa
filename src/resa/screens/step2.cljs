@@ -23,7 +23,7 @@
      ;; Title
      [:br]
      [:div {:style {:display "flex" :align-items "center"}}
-      (ant/select {:default-value "Mr." :on-change #(swap! store assoc-in [:data :title] %)}
+      (ant/select {:default-value "Mr." :on-change #(dispatch! store [:step2--set-title %])}
                   (ant/select-option {:value "Mr."} "Mr.")
                   (ant/select-option {:value "Mrs."} "Mrs.")
                   (ant/select-option {:value "Ms."} "Ms."))
@@ -31,20 +31,17 @@
                   :type "text"
                   :auto-focus true
                   :value (or name "")
-                  :on-change #(swap! store assoc-in [:data :name]
-                                     (.. % -target -value))})]
+                  :on-change #(dispatch! store [:step2--set-name %])})]
      ;; Phone number
      (ant/input {:placeholder "Your phone number"
                  :type "tel"
                  :value (or phone "")
-                 :on-change #(swap! store assoc-in [:data :phone]
-                                    (.. % -target -value))})
+                 :on-change #(dispatch! store [:step2--set-phone %])})
      ;; Email
      (ant/input {:placeholder "Your e-mail"
                  :type "email"
                  :value (or email "")
-                 :on-change #(swap! store assoc-in [:data :email]
-                                    (.. % -target -value))})
+                 :on-change #(dispatch! store [:step2--set-email %])})
 
      (ant/date-picker { :disabledDate disabledDate})
 
@@ -54,8 +51,7 @@
                  :placeholder "Number of guests"
                  :min 1
                  :value (or pax "")
-                 :on-change #(swap! store assoc-in [:data :pax]
-                                    (.. % -target -value))})
+                 :on-change #(dispatch! store [:step2--set-pax %])})
      [:br]
      (ant/button {:style {:height "4em"}
                   :on-click #(dispatch! store :go-forward)
