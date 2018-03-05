@@ -1,6 +1,7 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
+            [resa.components.header :refer [small-header]]
             [antizer.rum :as ant]
             [rum.core :as rum]))
 
@@ -10,6 +11,7 @@
         data (get m :data {})
         {:keys [pax time name phone email]} data]
     [:div {:style {:display "flex" :flex-direction "column"}}
+     (small-header store)
      ;; Title
      [:div {:style {:display "flex" :align-items "center"}}
       (ant/select {:default-value "Mr." :on-change #(swap! store assoc-in [:data :title] %)}
