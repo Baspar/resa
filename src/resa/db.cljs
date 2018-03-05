@@ -12,8 +12,8 @@
 
   (->> (range 60)
        (take-nth 15)
-       (filterv  #(< (rand) (/ 1 (+ 1 (.exp js/Math (/ x -3)))))
-       (assoc {} a ))))
+       (filterv  #(< (rand) (/ 1 (+ 1 (.exp js/Math (/ prob -3))))))
+       (assoc {} a )))
 
 (defn slot-gen
   []
