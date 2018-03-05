@@ -3,6 +3,11 @@
             [reaction.core :refer-macros [dispatch!]]
             [rum.core :refer-macros [defc]]))
 
+(def restaurant-info
+  {:name "FANCY RESTAURANT NAME"
+   :ratings "4.89 (488)"
+   :location "SINGAPORE CBD"})
+
 (defn- header-s
   [store back-button?]
   [:div {:style {:background-color "#EEEEEE"
@@ -27,12 +32,30 @@
     "MAKE A BOOKING"]
    [:div {:style {:font-size "1.2em"
                   :font-weight "bold"}}
-    "FANCY RESTAURANT NAME"]
-   [:div {:style {:font-size "0.7em"}} "4.89 (488)"]
-   [:div {:style {:font-size "0.7em"}} "SINGAPORE CBD"]])
+    (:name restaurant-info)]
+   [:div {:style {:font-size "0.7em"}} (:ratings restaurant-info)]
+   [:div {:style {:font-size "0.7em"}} (:location restaurant-info)]])
 (defc small-header
   [store]
   (header-s store true))
 (defc small-header-no-back
   [store]
   (header-s store false))
+
+(defc big-header
+  [store]
+  [:div {:style {:background-color "#EEEEEE"
+                 :display "flex"
+                 :flex-direction "column"
+                 :border "solid grey 1px"
+                 :padding 10}}
+   [:div {:style {:display "flex"
+                  :flex-direction "row"
+                  :justify-content "flex-end"}}
+    [:div {:style {:font-size "0.7em"}}
+     "PHOOD"]]
+   [:div {:style {:font-size "2em"
+                  :font-weight "bold"}}
+    (:name restaurant-info)]
+   [:div {:style {:font-size "0.7em"}} (:ratings restaurant-info)]
+   [:div {:style {:font-size "0.7em"}} (:location restaurant-info)]])
