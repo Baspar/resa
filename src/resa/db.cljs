@@ -8,23 +8,25 @@
       (format "YYYY-MM-DD"))))
 
 (defn x
-  [a]
+  [a prob]
 
   (->> (range 60)
        (take-nth 15)
-       (filterv  #(> (rand) prob))
-       (assoc {} a )))
+       (filterv  #(< (rand) (/ 1 (+ 1 (.exp js/Math (/ x -3)))))
+       (assoc {} a ))))
 
 (defn slot-gen
   []
-  (let [morning (->> (range 11 15)
-                     (map x )
-                     (into {}))
-        evening (->> (range 19 23)
-                     (map x )
-                     (into {}))
+  (let [morning (fn [day]
+                  (->> (range 11 15)
+                       (map #(x % day))
+                       (into {})))
+        evening (fn [day]
+                  (->> (range 19 23)
+                       (map #(x % day))
+                       (into {})))
         days (->> (range 200)
-                  (map (fn[x] {(day-gen x) (merge morning evening)}))
+                  (map (fn[x] {(day-gen x) (merge (morning x) (evening x))}))
                   (apply merge))]
         days))
 
