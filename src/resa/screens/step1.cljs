@@ -3,6 +3,7 @@
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
             [rum.core :as rum]
+            [resa.components.header :refer [big-header]]
             [resa.db :refer [avaliable-slot]]))
 
 (defn disabledDate
@@ -15,6 +16,7 @@
   (let [{:keys [pax time name phone email]} (:data @store)
         format "HH:mm"]
     [:div
+     (big-header store)
      [:br]
      (ant/input
        {:type "number"
@@ -26,7 +28,6 @@
         :on-change #(swap! store assoc-in [:data :pax]
                            (-> % .-target .-value))})
      [:br]
-
      (ant/date-picker {:style {:margin 5} :disabledDate disabledDate})
 
      (ant/time-picker {:format format :minute-step 15})
