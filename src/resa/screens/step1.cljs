@@ -13,31 +13,23 @@
 
 (defc screen1
   [store]
-  (let [{:keys [pax time name phone email]} (:data @store)
-        format "HH:mm"]
+  (let [m @store
+        format "HH:mm"
+        disabled? false]
     [:div
+     ;; Header
      (big-header store)
-     [:br]
-     (ant/input
-       {:type "number"
-        :placeholder "Number of guests"
-        :min 1
-        :style {:margin 5}
-        :auto-focus true
-        :value (or pax "")
-        :on-change #(swap! store assoc-in [:data :pax]
-                           (-> % .-target .-value))})
-     [:br]
-     (ant/date-picker {:style {:margin 5} :disabledDate disabledDate})
-
-     (ant/time-picker {:format format :minute-step 15})
-
-     (ant/input
-       {:type "datetime-local"
-        :value (or time "")
-        :style {:margin 5}
-        :on-change #(swap! store assoc-in [:data :time]
-                           (-> % .-target .-value))})
-     [:br]
-     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! store :h-next)} "Next...")
-     [:br]]))
+     ;; Buttons
+     [:div {:style {:display "flex"}}
+      (ant/button {:style {:flex 1 :padding 5}} "Info")
+      (ant/button {:style {:flex 1 :padding 5}} "Menu")
+      (ant/button {:style {:flex 1 :padding 5}} "Review")]
+     ;; Text
+     [:div {:style {:padding 10}} "An eclectic and authentic Northern French cuisine. Superb ambiance, suitable for romantic and business dinner. Lorem ipsum  it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."]
+     ;; Button
+     (ant/button {:style {:width "100%" :margin 5}
+                  :type "primary"
+                  :size "large"
+                  :disabled disabled?
+                  :on-click #(dispatch! store :go-forward)}
+                 "BOOK")]))

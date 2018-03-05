@@ -28,7 +28,7 @@
        "< Back")
      (ant/button
        {:style {:width "100%" :margin 5}
-        :on-click #(dispatch! store :h-confirm)
+        :on-click #(dispatch! store :go-forward)
         :auto-focus true}
        "Confirm booking!")
      [:br]]))

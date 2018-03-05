@@ -44,8 +44,5 @@
                  :on-change #(swap! store assoc-in [:data :pax]
                                     (.. % -target -value))})
      (ant/button {:style {:width "100%"}
-                  :on-click #(dispatch! store :h-back-to-step1)}
-                 "< Back")
-     (ant/button {:style {:width "100%"}
-                  :on-click #(dispatch! store :h-book)}
+                  :on-click #(dispatch! store :go-forward)}
                  "Book!")]))
