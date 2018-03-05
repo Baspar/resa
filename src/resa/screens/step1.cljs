@@ -30,15 +30,3 @@
                   :disabled disabled?
                   :on-click #(dispatch! store :go-forward)}
                  "MAKE A BOOKING")]))
-
-     (ant/time-picker {:format format :minute-step 15})
-
-     (ant/input
-       {:type "datetime-local"
-        :value (or time "")
-        :style {:margin 5}
-        :on-change #(swap! store assoc-in [:data :time]
-                           (-> % .-target .-value))})
-     [:br]
-     (ant/button {:style {:width "100%" :margin 5} :on-click #(dispatch! store :h-next)} "Next...")
-     [:br]]))
