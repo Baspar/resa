@@ -25,6 +25,10 @@
   [m value]
   (assoc-in m [:data :date] value))
 
+(defaction step2--set-hour
+  [m value]
+  (assoc-in m [:data :hour] value))
+
 ;; (defaction step2--set-
 ;;   [m event]
 ;;   m)

@@ -16,9 +16,10 @@
   (let [m @store
         data (get m :data {})
         format "HH:mm"
-        {:keys [pax time name phone email date]} data
+        {:keys [pax hour minutes name phone email date]} data
         disabled? false
         time-valid? (not (nil? date))
+        hour-valid? (not (nil? hour))
         disabledHours (fn [] (if date
                                (let [ totalHours (into #{} (range 1 23))
                                      hours (->> (get available-slot (.format date "YYYY-MM-DD"))
@@ -27,7 +28,13 @@
                                                           k)))
                                                 (into #{}))]
                                  (vec (clojure.set/difference totalHours hours)))
-                               []))]
+                               []))
+        disabledMinutes (fn [] (if hour
+                                 (let [totalMinute (into #{} (take-nth 15 (range 60)))
+                                       minutesAv (into #{} (get-in available-slot [(.format date "YYYY-MM-DD") (.hour hour)]))]
+                                   (vec (clojure.set/difference totalMinute minutesAv)))
+                                 []))]
+
     [:div {:style {:display "flex" :flex-direction "column"}}
      (small-header store)
      ;; Title
@@ -55,7 +62,8 @@
 
      (ant/date-picker { :on-change #(dispatch! store [:step2--set-date %])  :value date :disabledDate disabledDate})
 
-     (ant/time-picker {:on-change #(.log js/console %) :format format :minute-step 15 :disabledHours disabledHours :disabled (not time-valid?) :hideDisabledOptions true})
+     (ant/time-picker {:on-change #(dispatch! store [:step2--set-hour %] ) :format "HH" :disabledHours disabledHours :disabled (not time-valid?) :hideDisabledOptions true})
+     (ant/time-picker {:on-change #(.log js/console %) :format "mm" :minute-step 15 :disabledMinutes disabledMinutes :disabled (and (not hour-valid?) (not time-valid?)) })
      ;; Number pax
      (ant/input {:type "number"
                  :placeholder "Number of guests"
