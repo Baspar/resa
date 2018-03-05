@@ -16,19 +16,23 @@
   (let [m @store
         data (get m :data {})
         format "HH:mm"
-        {:keys [pax time name phone email date]} data
+        {:keys [pax hour minutes name phone email date]} data
         pax-valid? (and (not (empty? pax))
                         (re-matches #"\d{1,2}" pax))
-        time-valid? (not (nil? date))
         name-valid? (and (not (empty? name))
                          (< 3 (count name)))
         phone-valid? (and (not (empty? phone))
                           (re-matches #"\+?\d{7,}" phone))
         email-valid? (and (not (empty? email))
                           (re-matches #"[a-zA-Z0-9_.-]{2,}@[a-zA-Z0-9_-]{2,}\.[a-z]{2,5}" email))
+        time-valid? (not (nil? date))
+        hour-valid? (not (nil? hour))
+        minutes-valid? (not (nil? minutes))
         disabled? (not (and pax-valid?
-                            time-valid?
                             name-valid?
+                            time-valid?
+                            hour-valid?
+                            minutes-valid?
                             phone-valid?
                             email-valid?))
         disabledHours (fn [] (if date
@@ -39,7 +43,13 @@
                                                           k)))
                                                 (into #{}))]
                                  (vec (clojure.set/difference totalHours hours)))
-                               []))]
+                               []))
+        disabledMinutes (fn [] (if hour
+                                 (let [totalMinute (into #{} (take-nth 15 (range 60)))
+                                       minutesAv (into #{} (get-in available-slot [(.format date "YYYY-MM-DD") (.hour hour)]))]
+                                   (vec (clojure.set/difference totalMinute minutesAv)))
+                                 []))]
+
     [:div {:style {:display "flex" :flex-direction "column"}}
      (small-header store)
      ;; Title
@@ -70,9 +80,22 @@
                   :type "email"
                   :value (or email "")
                   :on-change #(dispatch! store [:step2--set-email %])})]
-     (ant/date-picker { :on-change #(dispatch! store [:step2--set-date %])  :value date :disabledDate disabledDate})
-
-     (ant/time-picker {:on-change #(.log js/console %) :format format :minute-step 15 :disabledHours disabledHours :disabled (not time-valid?) :hideDisabledOptions true})
+     [:div {:style {:display "flex" :align-items "center" :margin 5}}
+      (ant/icon {:type "calendar" :style {:width "6rem"}})
+      (ant/date-picker {:on-change #(dispatch! store [:step2--set-date %])
+                        :value date
+                        :disabledDate disabledDate})
+      (ant/time-picker {:on-change #(dispatch! store [:step2--set-hour %])
+                        :format "HH"
+                        :disabledHours disabledHours
+                        :disabled (not time-valid?)
+                        :hideDisabledOptions true})
+      (ant/time-picker {:on-change #(.log js/console %)
+                        :format "mm"
+                        :minute-step 15
+                        :disabledMinutes disabledMinutes
+                        :disabled (and (not hour-valid?)
+                                       (not time-valid?))})]
      ;; Number pax
      [:div {:style {:display "flex" :align-items "center" :margin 5}}
       (ant/icon {:type "user" :style {:width "6rem"}})
