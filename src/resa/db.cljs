@@ -1,6 +1,6 @@
 (ns resa.db)
 
-(def booked-slot
+(def avaliable-slot
   (let [today (.. js/window moment)
         day-in (fn [d]
                  (.. today
@@ -12,6 +12,7 @@
                  20 [0 30 45]}
      (day-in 2) {20 [0 30]
                  13 [15 30]}
+     (day-in 18){}
      (day-in 3) {20 [0 30]
                  13 [15 30]}
      (day-in 5) {20 [0 30]

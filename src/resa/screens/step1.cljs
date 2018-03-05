@@ -2,7 +2,13 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
-            [rum.core :as rum]))
+            [rum.core :as rum]
+            [resa.db :refer [avaliable-slot]]))
+
+(defn disabledDate
+  [current]
+  (let [data (if current (get avaliable-slot (.format current "YYYY-MM-DD") nil))]
+       (empty? data)))
 
 (defc screen1
   [store]
@@ -21,7 +27,7 @@
                            (-> % .-target .-value))})
      [:br]
 
-     (ant/date-picker {:style {:margin 5}})
+     (ant/date-picker {:style {:margin 5} :disabledDate disabledDate})
 
      (ant/time-picker {:format format :minute-step 15})
 
