@@ -20,7 +20,7 @@
                   :justify-content (if back-button? "space-between" "flex-end")}}
     (when back-button?
       (ant/button {:size "large"
-                   :on-click #(dispatch! store :header--go-back)}
+                   :on-click #(dispatch! store :go-back)}
                   "<<"))
     [:div {:style {:font-size "0.7em"}}
      "PHOOD"]]
