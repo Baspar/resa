@@ -3,13 +3,7 @@
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.components.header :refer [big-header]]
-            [resa.db :refer [avaliable-slot]]))
-
-(defn disabledDate
-  [current]
-  (let [data (if current (get avaliable-slot (.format current "YYYY-MM-DD") nil))]
-       (empty? data)))
+            [resa.components.header :refer [big-header]]))
 
 (defc screen1
   [store]

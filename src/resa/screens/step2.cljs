@@ -3,16 +3,23 @@
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
             [antizer.rum :as ant]
-            [rum.core :as rum]))
+            [rum.core :as rum]
+            [resa.db :refer [available-slot ]]))
+
+(defn disabledDate
+  [current]
+  (let [data (if current (get available-slot  (.format current "YYYY-MM-DD") nil))]
+    (empty? data)))
 
 (defc screen2
   [store]
   (let [m @store
         data (get m :data {})
-        {:keys [pax time name phone email]} data
+        format "HH:mm"
+        {:keys [pax time name phone email date]} data
         pax-valid? (and (not (empty? pax))
                         (re-matches #"\d{1,2}" pax))
-        time-valid? true ;; REMOVE
+        time-valid? (not (nil? date))
         name-valid? (and (not (empty? name))
                          (< 3 (count name)))
         phone-valid? (and (not (empty? phone))
@@ -23,8 +30,16 @@
                             time-valid?
                             name-valid?
                             phone-valid?
-                            email-valid?))]
-    (println email-valid?)
+                            email-valid?))
+        disabledHours (fn [] (if date
+                               (let [totalHours (into #{} (range 1 23))
+                                     hours (->> (get available-slot (.format date "YYYY-MM-DD"))
+                                                (keep (fn [[k v]]
+                                                        (when (not (empty? v))
+                                                          k)))
+                                                (into #{}))]
+                                 (vec (clojure.set/difference totalHours hours)))
+                               []))]
     [:div {:style {:display "flex" :flex-direction "column"}}
      (small-header store)
      ;; Title
@@ -55,6 +70,9 @@
                   :type "email"
                   :value (or email "")
                   :on-change #(dispatch! store [:step2--set-email %])})]
+     (ant/date-picker { :on-change #(dispatch! store [:step2--set-date %])  :value date :disabledDate disabledDate})
+
+     (ant/time-picker {:on-change #(.log js/console %) :format format :minute-step 15 :disabledHours disabledHours :disabled (not time-valid?) :hideDisabledOptions true})
      ;; Number pax
      [:div {:style {:display "flex" :align-items "center" :margin 5}}
       (ant/icon {:type "user" :style {:width "6rem"}})
