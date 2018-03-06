@@ -1,6 +1,7 @@
 (ns resa.actions.core
   (:require
     [reaction.core :refer-macros [defaction]]
+    [ajax.core :refer [POST]]
     resa.actions.step1
     resa.actions.step2
     resa.actions.step3
@@ -16,6 +17,7 @@
 
 (defaction go-forward
   [m]
+  (when (= (get m :screen) :step4))
   (update m :screen #(case (or % :step1)
                        :step1 :step2
                        :step2 :step3

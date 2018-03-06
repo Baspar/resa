@@ -14,7 +14,8 @@
                  [cljsjs/antd "3.2.0-0"]
                  [rum "0.11.2"]
                  [devcards "0.2.4"]
-                 [reaction "0.1.2"]]
+                 [reaction "0.1.2"]
+                 [cljs-ajax "0.7.3"]]
 
   :plugins [[lein-figwheel "0.5.14"]
             [lein-cljsbuild "1.1.7" :exclusions [org.clojure/clojure]]]
