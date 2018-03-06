@@ -15,7 +15,7 @@
                    :color "white"}}
      (small-header store)
      [:br]
-     [:div {:style {:background-color "rgba(25,29,9,0.8)"
+     [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
                     :padding 20
                     :flex 1}}
       [:ul

@@ -8,12 +8,18 @@
 (defc screen4
   [store]
   (let [{:keys [pax time name phone email]} (:data @store)]
-    [:div
+    [:div {:style {:flex 1
+                   :display "flex"
+                   :flex-direction "column"}}
      (small-header store)
      [:br]
-     [:p "Dear MM. " (or name "")]
-     [:p "Thank you for your reservation!"]
-     [:p "A confirmation e-mail has been sent to: " (or email "")]]))
+     [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
+                    :padding 20
+                    :color "white"
+                    :flex 1}}
+      [:p "Dear MM. " (or name "")]
+      [:p "Thank you for your reservation!"]
+      [:p "A confirmation e-mail has been sent to: " (or email "")]]]))
 
 (defc nav
   [state]

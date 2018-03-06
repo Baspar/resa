@@ -87,17 +87,21 @@
 (defc navigation
   [store]
     (let [m @store
-          screen (get m :screen :step1)]
+          screen (get m :screen :step1)
+          disabled? (or (= screen :step1)
+                        (= screen :step4))]
     [:div {:style {:display "flex"
                    :padding 25
                    :background-color "#000000"
                    :justify-content "space-between"
                    :color "#d6cda0"}}
-     (ant/icon {:on-click #(dispatch! store :go-back)
+     (ant/icon {:on-click #(when (not disabled?)
+                             (dispatch! store :go-back))
                 :type "arrow-left"
+                :disable disabled?
                 :style {:font-size 20
                         :transition "opacity .3s"
-                        :opacity (if (= screen :step1) 0 1)}})
+                        :opacity (if disabled? 0 1)}})
      [:img {:src "/images/logo-phood.svg"}]]))
 
 ;; Header

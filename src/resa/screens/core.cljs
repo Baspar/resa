@@ -16,6 +16,7 @@
                     node (assoc :height "100vh"))}
      (nav store)
      [:div {:style {:flex 1
+                    :display "flex"
                     :overflow-y "auto"}}
       (screen store)]
      (next-button store)]))
