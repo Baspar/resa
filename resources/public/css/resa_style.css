@@ -28,6 +28,10 @@
   box-shadow: 0 0 0 2px rgba(144, 130, 71, 0.2);
 }
 
+#button-fake:active {
+  background-color: #cdbb66;
+}
+
 body {
  background: url("/images/background.png");
 }

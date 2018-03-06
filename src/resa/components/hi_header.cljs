@@ -9,6 +9,15 @@
                        :padding "6px 20px"
                        :font-weight "600"
                        :line-height "1.19em"})
+(def button-style {:font-size 9
+                   :border-radius 0
+                   :margin 1
+                   :border "none"
+                   :text-align "left"
+                   :padding-right 25
+                   :background-color "rgba(109, 90, 0, 0.7)"
+                   :color "#ffffff"
+                   :letter-spacing "2.4px"})
 
 (def title-text-style {:color "#ffffff"
                        :background-color "#cdbb66"
@@ -34,6 +43,18 @@
                         :transition "opacity .3s"
                         :opacity (if (= screen :step1) 0 1)}})
      [:img {:src "/images/logo-phood.svg"}]]))
+
+(defc buttons
+  []
+  [:div {:style {:display "flex"}}
+   [:div {:style {:flex 7}}
+    [:div
+     (ant/button-group {:style {:margin "40px 0px 40px 20px"}
+                        :type "star"}
+                       (ant/button {:style button-style :class "button-fake"} "INFO")
+                       (ant/button {:style button-style} "MENU")
+                       (ant/button {:style button-style} "REVIEW"))]]
+   [:div {:style {:flex 3}}]])
 
 (defc restaurant-info
   []
@@ -62,7 +83,8 @@
       [:span {:style big-title-text-style} "FANCY"] [:br]
       [:span {:style big-title-text-style} "RESTAURANT"] [:br]
       [:span {:style big-title-text-style} "NAME"] [:br]]
-      (restaurant-info)])
+      (restaurant-info)
+      (buttons)])
 
 (defc title
   []
@@ -74,4 +96,5 @@
       [:span {:style title-text-style} "RESTAURANT"] [:br]
       [:span {:style title-text-style} "NAME"] [:br]]
     (restaurant-info)])
+
 
