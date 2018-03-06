@@ -40,7 +40,6 @@
           old-min (get-in m [:data :minutes])
           new-hour (-> value (.format "HH") (js/parseInt))
           new-min (-> value (.format "mm") (js/parseInt))]
-      (println "OK")
       (cond
         (not= old-hour new-hour) (-> m
                                      (assoc-in [:data :hour] new-hour)
