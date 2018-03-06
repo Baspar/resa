@@ -85,7 +85,7 @@
                      :style {:width "100%"}
                      :value (when date (js/moment date))
                      :disabledDate disabledDate}
-                    (custom-icon "calendar"))
+                    #_(custom-icon "calendar"))
 
        (time-picker minutes-invalid?
                     {:on-change #(dispatch! store [:step2--set-time %])
@@ -98,7 +98,7 @@
                      ;; :value (when hour (.. js/window moment (set "hour" hour)))
                      :value (when (and hour minutes)
                               (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}
-                    (custom-icon "clock-circle-o"))]
+                    #_(custom-icon "clock-circle-o"))]
       ;; Number pax
       (input pax-invalid?
              {:type "number"
