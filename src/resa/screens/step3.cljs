@@ -8,17 +8,27 @@
 (defc screen3
   [store]
   (let [data (:data @store)
-        {:keys [pax time name phone email]} data]
+        {:keys [pax title date minutes hour name phone email]} data]
     [:div {:style {:display "flex"
-                   :flex-direction "column"}}
+                   :flex-direction "column"
+                   :flex 1
+                   :color "white"}}
      (small-header store)
      [:br]
-     [:ul
-      [:li "Name: " (or name "")]
-      [:li "Phone: " (or phone "")]
-      [:li "E-mail: " (or email "")]
-      [:li "Date/time: " (or time "")]
-      [:li "N. of guests: " (or pax "")]]]))
+     [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
+                    :padding 20
+                    :flex 1}}
+      [:ul
+       [:li (or title "") (or name "")]
+       [:li "Mobile: " (or phone "")]
+       [:li "E-mail: " (or email "")]
+       [:li "Date/time: "
+        (or date "")
+        " "
+        (or hour "")
+        ":"
+        (or minutes "")]
+       [:li "N. of guests: " (or pax "")]]]]))
 
 (defc nav
   [state]

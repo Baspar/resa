@@ -37,6 +37,6 @@
   background-color: #cdbb66;
 }
 
-body {
+#main-app-area {
  background: url("/images/background.png");
 }

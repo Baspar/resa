@@ -49,13 +49,14 @@
                                  (vec (clojure.set/difference totalMinute minutesAv))))]
 
     [:form {:on-submit submit-fn}
+     [:input {:style {:display "none"}:type "submit"}]
      [:div {:style {:display "flex"
                     :flex-direction "column"}}
       ;; Header
       (small-header store)
       [:br]
-      [:div {:style {:background-color "rgba(25,29,9,0.8)"
-                     :padding 20 }}
+      [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
+                     :padding 20}}
        ;; Title
        [:div {:style {:font-size 9
                       :color "white"
