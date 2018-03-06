@@ -2,7 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
-            [resa.components.hi-lib :refer [custom-icon input select date-picker button]]
+            [resa.components.hi-lib :refer [custom-icon input select date-picker time-picker button]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -86,17 +86,19 @@
                      :value (when date (js/moment date))
                      :disabledDate disabledDate}
                     (custom-icon "calendar"))
-       (ant/form-item (form-item-param minutes-invalid?)
-                      (ant/time-picker {:on-change #(dispatch! store [:step2--set-time %])
-                                        :style {:width "100%"}
-                                        :format "HH:mm"
-                                        :minute-step 15
-                                        :disabledHours disabledHours
-                                        :disabledMinutes disabledMinutes
-                                        :disabled (not date)
-                                        ;; :value (when hour (.. js/window moment (set "hour" hour)))
-                                        :value (when (and hour minutes)
-                                                 (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}))]
+
+       (time-picker minutes-invalid?
+                    {:on-change #(dispatch! store [:step2--set-time %])
+                     :style {:width "100%"}
+                     :format "HH:mm"
+                     :minute-step 15
+                     :disabledHours disabledHours
+                     :disabledMinutes disabledMinutes
+                     :disabled (not date)
+                     ;; :value (when hour (.. js/window moment (set "hour" hour)))
+                     :value (when (and hour minutes)
+                              (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}
+                    (custom-icon "clock-circle-o"))]
       ;; Number pax
       (input pax-invalid?
              {:type "number"
