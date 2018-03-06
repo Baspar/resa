@@ -8,7 +8,8 @@
    (custom-icon icon {}))
   ([icon-name params]
    (ant/icon (-> params
-                 (merge {:type icon-name :style {:width "4rem"}})))))
+                 (merge {:type icon-name :style {:color "white"
+                                                 :width "4rem"}})))))
 
 (defn- form-item-param
   ([error?]
@@ -32,18 +33,17 @@
 (defc select
   [store]
   (ant/select {:default-value "Mr."
-               :style {:width "6rem"}
+               :style {:width "6rem"
+                       :color "white"}
                :on-change #(dispatch! store [:step2--set-title %])}
               (ant/select-option {:value "Mr."} "Mr.")
               (ant/select-option {:value "Mrs."} "Mrs.")
               (ant/select-option {:value "Ms."} "Ms.")))
 
 (defc date-picker
-  ([error? params left-item]
-   [:div {:style {:display "flex" :align-items "center"}}
-    left-item
-    (ant/form-item (form-item-param error?)
-                   (ant/date-picker params))]))
+  ([error? params]
+   (ant/form-item (form-item-param error?)
+                  (ant/date-picker params))))
 
 (defc button
   [params text]
@@ -58,8 +58,7 @@
                 text)))
 
 (defc time-picker
-  [error? params left-item]
-  [:div {:style {:display "flex" :align-items "center"}}
-   left-item
-   (ant/form-item (form-item-param error?)
-                  (ant/time-picker params))])
+  [error? params]
+  (ant/form-item (-> (form-item-param error?)
+                     (assoc-in [:style :margin-left] 20))
+                 (ant/time-picker params)))
