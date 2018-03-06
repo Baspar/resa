@@ -2,7 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
-            [resa.components.med-lib :refer [custom-icon input select]]
+            [resa.components.med-lib :refer [custom-icon input select date-picker]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -80,12 +80,13 @@
              (custom-icon "mail"))
       ;; Calendar
       [:div {:style {:display "flex" :align-items "center" }}
-       (custom-icon "calendar")
-       (ant/form-item (form-item-param date-invalid? 2)
-                      (ant/date-picker {:on-change #(dispatch! store [:step2--set-date %])
-                                        :style {:width "100%"}
-                                        :value (when date (js/moment date))
-                                        :disabledDate disabledDate}))
+       (date-picker date-invalid?
+                    {:on-change #(dispatch! store [:step2--set-date %])
+                     :style {:width "100%"}
+                     :value (when date (js/moment date))
+                     :disabledDate disabledDate}
+                    (custom-icon "calendar")
+                    )
        (ant/form-item (form-item-param minutes-invalid?)
                       (ant/time-picker {:on-change #(dispatch! store [:step2--set-time %])
                                         :style {:width "100%"}
