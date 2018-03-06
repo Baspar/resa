@@ -2,7 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
-            [resa.components.med-lib :refer [custom-icon input select]]
+            [resa.components.hi-lib :refer [custom-icon input select]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))

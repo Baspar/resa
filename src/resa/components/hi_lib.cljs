@@ -7,8 +7,8 @@
   ([icon]
    (custom-icon icon {}))
   ([icon-name params]
-   (ant/icon (merge params
-                    {:type icon-name :style {:width "6rem" :margin-bottom 24}}))))
+   (ant/icon (-> params
+                 (merge {:type icon-name :style {:width "4rem"}})))))
 
 (defn- form-item-param
   ([error?]
@@ -22,7 +22,19 @@
   ([error? params]
    (input error? params nil))
   ([error? params left-item]
-   [:div {:style {:display "flex" :align-items "center"}}
-    left-item
-    (ant/form-item (form-item-param error?)
-                   (ant/input params))]))
+   (ant/form-item (form-item-param error?)
+                  (ant/input (-> params
+                                 (assoc :addon-before left-item)
+                                 (assoc-in [:style :border-radius] 0)
+                                 (assoc-in [:style :width] "100%")
+                                 (assoc-in [:style :color] "#6b6b6b")
+                                 (assoc-in [:style :font-size] "16px"))))))
+
+(defc select
+  [store]
+  (ant/select {:default-value "Mr."
+               :style {:width "6rem"}
+               :on-change #(dispatch! store [:step2--set-title %])}
+              (ant/select-option {:value "Mr."} "Mr.")
+              (ant/select-option {:value "Mrs."} "Mrs.")
+              (ant/select-option {:value "Ms."} "Ms.")))

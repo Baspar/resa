@@ -22,7 +22,7 @@
   ([error? params]
    (input error? params nil))
   ([error? params left-item]
-   [:div {:style {:display "flex" :align-items "center"}}
+   [:div {:style {:display "flex" :align-items "center" :flex 1}}
     left-item
     (ant/form-item (form-item-param error?)
                    (ant/input params))]))
