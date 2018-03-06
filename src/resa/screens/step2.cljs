@@ -5,7 +5,7 @@
             [resa.components.med-lib :refer [custom-icon input select]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.db :refer [available-slot ]]))
+            [resa.db :refer [available-slot]]))
 
 (defn disabledDate
   [current]
@@ -56,20 +56,14 @@
       ;; Title
       [:br]
       [:div {:style {:display "flex" :align-items "center" }}
-       (select store)
-       ;; (ant/form-item {}
-       ;;                (ant/select {:default-value "Mr."
-       ;;                             :style {:width "6rem"}
-       ;;                             :on-change #(dispatch! store [:step2--set-title %])}
-       ;;                            (ant/select-option {:value "Mr."} "Mr.")
-       ;;                            (ant/select-option {:value "Mrs."} "Mrs.")
-       ;;                            (ant/select-option {:value "Ms."} "Ms.")))
+
        (input name-invalid?
               {:placeholder "Your name"
                :type "text"
                :auto-focus true
                :value (or name "")
-               :on-change #(dispatch! store [:step2--set-name %])})]
+               :on-change #(dispatch! store [:step2--set-name %])}
+              (select store))]
       ;; Phone number
       (input phone-invalid?
              {:placeholder "Your phone number"
