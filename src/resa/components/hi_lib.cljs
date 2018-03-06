@@ -23,12 +23,19 @@
   ([error? params]
    (input error? params nil))
   ([error? params left-item]
-   (ant/form-item (form-item-param error?)
-                  (ant/input (-> params
-                                 (assoc :addon-before left-item)
-                                 (assoc-in [:style :width] "100%")
-                                 (assoc-in [:style :color] "#6b6b6b")
-                                 (assoc-in [:style :font-size] "16px"))))))
+   [:div {:style {:display "flex" :flex 1}}
+    [:div {:class "ant-input-group-addon"
+           :style {:height "4rem"
+                   :width "6rem"
+                   :display "flex"
+                   :justify-content "center"
+                   :align-items "center"}}
+     left-item]
+    (ant/form-item (form-item-param error?)
+                   (ant/input (-> params
+                                  (assoc-in [:style :width] "100%")
+                                  (assoc-in [:style :color] "#6b6b6b")
+                                  (assoc-in [:style :font-size] "16px"))))]))
 
 (defc select
   [store]

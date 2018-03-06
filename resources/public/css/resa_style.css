@@ -2,7 +2,9 @@
 .ant-input.disabled, .ant-time-picker-input[disabled] {
   background-color: rgba(255, 255, 255, 0.4);
 }
-.ant-time-picker-input,.ant-calendar-picker-input {
+.ant-time-picker-input,
+.ant-calendar-picker-input,
+.ant-input {
   border-radius: 0 5px 5px 0;
 }
 .ant-input, .ant-time-picker-input {
