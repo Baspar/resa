@@ -1,8 +1,7 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.header :refer [small-header]]
-            [resa.components.hi-lib :refer [custom-icon input select date-picker time-picker button]]
+            [resa.components.hi-lib :refer [custom-icon input select date-picker time-picker button small-header navigation]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -115,7 +114,7 @@
 
 (defc navigation
   [state]
-  [:div])
+  (navigation state))
 
 (defc next-button
   [store]

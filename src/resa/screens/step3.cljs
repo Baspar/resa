@@ -1,8 +1,7 @@
 (ns resa.screens.step3
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.header :refer [small-header]]
-            [resa.components.med-lib :refer [button]]
+            [resa.components.hi-lib :refer [small-header navigation]]
             [antizer.rum :as ant]
             [rum.core :as rum]))
 
@@ -23,7 +22,7 @@
 
 (defc navigation
   [state]
-  [:div])
+ (navigation state))
 
 (defc next-button
   [store]

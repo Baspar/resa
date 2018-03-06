@@ -97,7 +97,8 @@
                    :background-color "#000000"
                    :justify-content "space-between"
                    :color "#d6cda0"}}
-     (ant/icon {:type "arrow-left"
+     (ant/icon {:on-click #(dispatch! store :go-back")
+                :type "arrow-left"
                 :style {:font-size 20
                         :transition "opacity .3s"
                         :opacity (if (= screen :step1) 0 1)}})
@@ -158,7 +159,7 @@
     (:location data)]]
    [:div {:style {:flex 3}}]])
 (defc big-header
-  []
+  [_]
   [:div
     [:div {:style { :margin "10px 0px"
                    :flex-direction "column"
@@ -169,7 +170,7 @@
       (restaurant-info)
       (buttons)])
 (defc small-header
-  []
+  [_]
   [:div
     [:div {:style { :margin "10px 0px"
                    :flex-direction "column"
