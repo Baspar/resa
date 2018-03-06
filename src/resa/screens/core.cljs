@@ -9,15 +9,15 @@
     [reaction.core :refer-macros [dispatch!]]))
 
 (defc ui-wrap
-  [store screen nav next-button]
+  [store nav screen next-button]
   (let [node (.getElementById js/document "main-app-area")]
     [:div {:style (cond-> {:display "flex"
                            :flex-direction "column"}
                     node (assoc :height "100vh"))}
      (nav store)
-     ;; [:div {:style {:flex 1
-     ;;                :overflow-y "auto"}}
-     ;;  (screen store)]
+     [:div {:style {:flex 1
+                    :overflow-y "auto"}}
+      (screen store)]
      (next-button store)]))
 
 (defmulti ui-screen
