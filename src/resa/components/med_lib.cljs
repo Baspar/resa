@@ -38,8 +38,16 @@
                              (ant/select-option {:value "Ms."} "Ms."))))
 
 (defc date-picker
-  ([error? params left-item]
+  [error? params left-item]
    [:div {:style {:display "flex" :align-items "center"}}
     left-item
     (ant/form-item (form-item-param error?)
-                   (ant/date-picker params))]))
+                   (ant/date-picker params))])
+
+(defc time-picker
+  [error? params left-item]
+  [:div {:style {:display "flex" :align-items "center"}}
+   left-item
+   (ant/form-item (form-item-param error?)
+                  (ant/time-picker params))])
+
