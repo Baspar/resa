@@ -1,7 +1,7 @@
 (ns resa.components.header
   (:require [antizer.rum :as ant]
             [reaction.core :refer-macros [dispatch!]]
-            [rum.core :refer-macros [defc]]
+            [rum.core :refer-macros [defc]]))
 (def restaurant-info
   {:name "FANCY RESTAURANT NAME"
    :ratings "4.89 (488)"
