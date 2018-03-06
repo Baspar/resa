@@ -102,11 +102,11 @@
 
 ;; Header
 (def big-title-text-style {:color "#ffffff"
-                       :background-color "#cdbb66"
-                       :font-size 36
-                       :padding "6px 20px"
-                       :font-weight "600"
-                       :line-height "1.19em"})
+                           :background-color "#cdbb66"
+                           :font-size 36
+                           :padding "6px 20px"
+                           :font-weight "600"
+                           :line-height "1.19em"})
 (def button-style {:font-size 9
                    :border-radius 0
                    :margin 1
@@ -121,7 +121,7 @@
                        :font-size 24
                        :padding "6px 20px"
                        :font-weight "500"
-                       :line-height "1.19em"})
+                       :line-height "1.3em"})
 (def data
   {:name "FANCY RESTAURANT NAME"
    :ratings "4.89 (488)"
