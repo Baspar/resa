@@ -158,8 +158,7 @@
   [_]
   [:div
     [:div {:style { :margin "10px 0px"
-                   :flex-direction "column"
-                   :border "solid grey 1px"}}
+                   :flex-direction "column"}}
       [:span {:style big-title-text-style} "FANCY"] [:br]
       [:span {:style big-title-text-style} "RESTAURANT"] [:br]
       [:span {:style big-title-text-style} "NAME"] [:br]]
@@ -169,8 +168,7 @@
   [_]
   [:div
     [:div {:style { :margin "10px 0px"
-                   :flex-direction "column"
-                   :border "solid grey 1px"}}
+                   :flex-direction "column"}}
       [:span {:style title-text-style} "FANCY"] [:br]
       [:span {:style title-text-style} "RESTAURANT"] [:br]
       [:span {:style title-text-style} "NAME"] [:br]]
