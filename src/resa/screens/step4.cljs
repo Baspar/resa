@@ -15,7 +15,7 @@
      [:p "Thank you for your reservation!"]
      [:p "A confirmation e-mail has been sent to: " (or email "")]]))
 
-(defc navigation
+(defc nav
   [state]
   (navigation state))
 

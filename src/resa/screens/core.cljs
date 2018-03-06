@@ -9,11 +9,16 @@
     [reaction.core :refer-macros [dispatch!]]))
 
 (defc ui-wrap
-  [store screen navigation next-button]
-  [:div
-   (navigation store)
-   (screen store)
-   (next-button store)])
+  [store screen nav next-button]
+  (let [node (.getElementById js/document "main-app-area")]
+    [:div {:style (cond-> {:display "flex"
+                           :flex-direction "column"}
+                    node (assoc :height "100vh"))}
+     (nav store)
+     ;; [:div {:style {:flex 1
+     ;;                :overflow-y "auto"}}
+     ;;  (screen store)]
+     (next-button store)]))
 
 (defmulti ui-screen
   (fn [store] (get @store :screen :step1)))
@@ -22,7 +27,7 @@
 (defmethod ui-screen :step1
   [store]
   (ui-wrap store
-           screen1/navigation
+           screen1/nav
            screen1/screen1
            screen1/next-button))
 
@@ -30,7 +35,7 @@
 (defmethod ui-screen :step2
   [store]
   (ui-wrap store
-           screen2/navigation
+           screen2/nav
            screen2/screen2
            screen2/next-button))
 
@@ -38,7 +43,7 @@
 (defmethod ui-screen :step3
   [store]
   (ui-wrap store
-           screen3/navigation
+           screen3/nav
            screen3/screen3
            screen3/next-button))
 
@@ -46,6 +51,6 @@
 (defmethod ui-screen :step4
   [store]
   (ui-wrap store
-           screen4/navigation
+           screen4/nav
            screen4/screen4
            screen4/next-button))

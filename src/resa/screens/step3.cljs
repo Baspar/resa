@@ -20,7 +20,7 @@
       [:li "Date/time: " (or time "")]
       [:li "N. of guests: " (or pax "")]]]))
 
-(defc navigation
+(defc nav
   [state]
  (navigation state))
 

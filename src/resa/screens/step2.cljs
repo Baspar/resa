@@ -112,7 +112,7 @@
               :on-change #(dispatch! store [:step2--set-pax %])}
              (custom-icon "user"))]]))
 
-(defc navigation
+(defc nav
   [state]
   (navigation state))
 

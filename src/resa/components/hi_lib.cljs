@@ -84,9 +84,6 @@
     left-item]
    (ant/form-item (form-item-param error?)
                   (ant/time-picker params))])
-  (:require [antizer.rum :as ant]
-            [reaction.core :refer-macros [dispatch!]]
-            [rum.core :refer-macros [defc]]))
 
 (defc navigation
   [store]
@@ -97,7 +94,7 @@
                    :background-color "#000000"
                    :justify-content "space-between"
                    :color "#d6cda0"}}
-     (ant/icon {:on-click #(dispatch! store :go-back")
+     (ant/icon {:on-click #(dispatch! store :go-back)
                 :type "arrow-left"
                 :style {:font-size 20
                         :transition "opacity .3s"
