@@ -33,6 +33,6 @@
   [state]
   [:div])
 
-(defc button
+(defc next-button
   [state]
   [:div])
