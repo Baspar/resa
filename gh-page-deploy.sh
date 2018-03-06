@@ -31,6 +31,7 @@ then
     cp -r $build $path
     git checkout gh-pages
     cp -r $path/* .
+    rm -r js/compiled/out
     git add --all
     git commit -am "automatic deployement on gh-pages"
     git push origin gh-pages
