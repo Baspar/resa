@@ -1,7 +1,7 @@
 (ns resa.screens.step3
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.hi-lib :refer [small-header navigation]]
+            [resa.components.hi-lib :refer [small-header navigation button]]
             [antizer.rum :as ant]
             [rum.core :as rum]))
 
