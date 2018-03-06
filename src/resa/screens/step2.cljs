@@ -49,6 +49,7 @@
                                  (vec (clojure.set/difference totalMinute minutesAv))))]
 
     [:form {:on-submit submit-fn}
+     [:input {:style {:display "none"}:type "submit"}]
      [:div {:style {:display "flex"
                     :flex-direction "column"}}
       ;; Header
