@@ -128,4 +128,4 @@
 
 (defc next-button
   [state]
-  [:div])
+  [:div "ta mere"])

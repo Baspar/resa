@@ -1,43 +1,51 @@
 (ns resa.screens.core
   (:require
-    [resa.screens.step1 :refer [screen1]]
-    [resa.screens.step2 :refer [screen2]]
-    [resa.screens.step3 :refer [screen3]]
+    [resa.screens.step1 :as screen1]
+    [resa.screens.step2 :as screen2]
+    [resa.screens.step3 :as screen3]
+    [resa.screens.step4 :as screen4]
     [antizer.rum :as ant]
-    [rum.core :as rum]
-    [resa.screens.step4 :refer [screen4]]
+    [rum.core :refer-macros [defc]]
     [reaction.core :refer-macros [dispatch!]]))
+
+(defc ui-wrap
+  [store screen navigation next-button]
+  [:div
+   (navigation store)
+   (screen store)
+   (next-button store)])
 
 (defmulti ui-screen
   (fn [store] (get @store :screen :step1)))
 
+;; step1
 (defmethod ui-screen :step1
   [store]
-  (screen1 store))
+  (ui-wrap store
+           screen1/navigation
+           screen1/screen1
+           screen1/next-button))
 
 ;;; step2
 (defmethod ui-screen :step2
   [store]
-  (screen2 store))
+  (ui-wrap store
+           screen2/navigation
+           screen2/screen2
+           screen2/next-button))
 
 ;;; step3
 (defmethod ui-screen :step3
   [store]
-  (screen3 store))
+  (ui-wrap store
+           screen3/navigation
+           screen3/screen3
+           screen3/next-button))
 
 ;;; step4
 (defmethod ui-screen :step4
   [store]
-  (screen4 store))
-  ;; (let [{:keys [pax time name phone email]} (:data @store)]
-  ;;   (html [:div
-  ;;          [:br]
-  ;;          [:p "Dear MM. " (or name "")]
-  ;;          [:p "Thank you for your reservation!"]
-  ;;          [:p "A confirmation e-mail has been sent to: " (or email "")]
-  ;;          [:button
-  ;;           {:class "btn btn-default btn-block"
-  ;;            :auto-focus true
-  ;;            :on-click #(dispatch! :h-start-again store)}
-  ;;           "<< Start again"]
-  ;;          [:br]])))
+  (ui-wrap store
+           screen4/navigation
+           screen4/screen4
+           screen4/next-button))
