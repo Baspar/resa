@@ -50,67 +50,69 @@
 
     [:form {:on-submit submit-fn}
      [:div {:style {:display "flex"
-                    :flex-direction "column"
-                    :background-color "rgba(25,29,9,0.8)"}}
+                    :flex-direction "column"}}
       ;; Header
       (small-header store)
-      ;; Title
       [:br]
-      [:div {:style {:font-size 9
-                     :color "white"
-                     :font-weight "bold"}}
-       "INFORMATION REQUIRED"]
-      [:br][:br]
-      (input name-invalid?
-             {:placeholder "Your name"
-              :type "text"
-              :auto-focus true
-              :value (or name "")
-              :on-change #(dispatch! store [:step2--set-name %])}
-             (select store))
-      ;; Phone number
-      (input phone-invalid?
-             {:placeholder "Your phone number"
-              :type "tel"
-              :value (or phone "")
-              :on-change #(dispatch! store [:step2--set-phone %])}
-             (custom-icon "phone"))
-      ;; Email
-      (input email-invalid?
-             {:placeholder "Your e-mail"
-              :type "email"
-              :value (or email "")
-              :on-change #(dispatch! store [:step2--set-email %])}
-             (custom-icon "mail"))
-      ;; Calendar
-      [:div {:style {:display "flex" :align-items "center"}}
-       (date-picker date-invalid?
-                    {:on-change #(dispatch! store [:step2--set-date %])
-                     :style {:width "100%"}
-                     :value (when date (js/moment date))
-                     :disabledDate disabledDate}
-                    (custom-icon "calendar"))
+      [:div {:style {:background-color "rgba(25,29,9,0.8)"
+                     :padding 20 }}
+       ;; Title
+       [:div {:style {:font-size 9
+                      :color "white"
+                      :font-weight "bold"}}
+        "INFORMATION REQUIRED"]
 
-       (time-picker minutes-invalid?
-                    {:on-change #(dispatch! store [:step2--set-time %])
-                     :style {:width "100%"}
-                     :format "HH:mm"
-                     :minute-step 15
-                     :disabledHours disabledHours
-                     :disabledMinutes disabledMinutes
-                     :disabled (not date)
-                     ;; :value (when hour (.. js/window moment (set "hour" hour)))
-                     :value (when (and hour minutes)
-                              (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}
-                    (custom-icon "clock-circle-o"))]
-      ;; Number pax
-      (input pax-invalid?
-             {:type "number"
-              :placeholder "Number of guests"
-              :min 1
-              :value (or pax "")
-              :on-change #(dispatch! store [:step2--set-pax %])}
-             (custom-icon "user"))]]))
+       [:br]
+       (input name-invalid?
+              {:placeholder "Your name"
+               :type "text"
+               :auto-focus true
+               :value (or name "")
+               :on-change #(dispatch! store [:step2--set-name %])}
+              (select store))
+       ;; Phone number
+       (input phone-invalid?
+              {:placeholder "Your phone number"
+               :type "tel"
+               :value (or phone "")
+               :on-change #(dispatch! store [:step2--set-phone %])}
+              (custom-icon "phone"))
+       ;; Email
+       (input email-invalid?
+              {:placeholder "Your e-mail"
+               :type "email"
+               :value (or email "")
+               :on-change #(dispatch! store [:step2--set-email %])}
+              (custom-icon "mail"))
+       ;; Calendar
+       [:div {:style {:display "flex" :align-items "center"}}
+        (date-picker date-invalid?
+                     {:on-change #(dispatch! store [:step2--set-date %])
+                      :style {:width "100%"}
+                      :value (when date (js/moment date))
+                      :disabledDate disabledDate}
+                     (custom-icon "calendar"))
+
+        (time-picker minutes-invalid?
+                     {:on-change #(dispatch! store [:step2--set-time %])
+                      :style {:width "100%"}
+                      :format "HH:mm"
+                      :minute-step 15
+                      :disabledHours disabledHours
+                      :disabledMinutes disabledMinutes
+                      :disabled (not date)
+                      ;; :value (when hour (.. js/window moment (set "hour" hour)))
+                      :value (when (and hour minutes)
+                               (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}
+                     (custom-icon "clock-circle-o"))]
+       ;; Number pax
+       (input pax-invalid?
+              {:type "number"
+               :placeholder "Number of guests"
+               :min 1
+               :value (or pax "")
+               :on-change #(dispatch! store [:step2--set-pax %])}
+              (custom-icon "user"))]]]))
 
 (defc nav
   [state]
