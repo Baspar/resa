@@ -36,4 +36,10 @@
               :on-click #(dispatch! store :go-forward)}
              "MAKE A BOOKING")]))
 
+(defc navigation
+  [state]
+  [:div])
 
+(defc button
+  [state]
+  [:div])

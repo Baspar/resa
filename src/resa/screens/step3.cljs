@@ -28,3 +28,11 @@
               :size "large"
               :disabled disabled?}
              "SUBMIT")]))
+
+(defc navigation
+  [state]
+  [:div])
+
+(defc button
+  [state]
+  [:div])

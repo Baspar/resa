@@ -14,3 +14,11 @@
      [:p "Dear MM. " (or name "")]
      [:p "Thank you for your reservation!"]
      [:p "A confirmation e-mail has been sent to: " (or email "")]]))
+
+(defc navigation
+  [state]
+  [:div])
+
+(defc button
+  [state]
+  [:div])
