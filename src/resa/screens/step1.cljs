@@ -4,7 +4,8 @@
             [resa.components.med-lib :refer [button]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.components.header :refer [big-header]]))
+            [resa.components.header :refer [big-header]]
+            [resa.components.hi-header :refer [header big-title]]))
 
 (defc screen1
   [store]
@@ -13,8 +14,14 @@
         disabled? false]
     [:div {:style {:display "flex"
                    :flex-direction "column"}}
-     ;; Header
-     (big-header store)
+
+     ;; Header hi
+     (header store)
+     (big-title)
+
+     ;; Header low/mid
+     ;; (big-header store)
+
      ;; Buttons
      [:div {:style {:display "flex"}}
       (ant/button {:style {:flex 1 :height "4em"}} "Info")
