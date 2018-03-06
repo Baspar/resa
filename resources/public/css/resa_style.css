@@ -1,12 +1,15 @@
 /* resa CSS */
-
 .ant-input.disabled, .ant-time-picker-input[disabled] {
   background-color: rgba(255, 255, 255, 0.4);
+}
+.ant-time-picker-input,.ant-calendar-picker-input {
+  border-radius: 0 5px 5px 0;
 }
 .ant-input, .ant-time-picker-input {
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
   border: solid 1px #979797;
+  height: 4rem;
 }
 .has-error .ant-input-group-addon {
   background-color: rgba(124, 124, 124, 0.5);

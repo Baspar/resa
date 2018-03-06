@@ -41,9 +41,17 @@
               (ant/select-option {:value "Ms."} "Ms.")))
 
 (defc date-picker
-  ([error? params]
-   (ant/form-item (form-item-param error?)
-                  (ant/date-picker params))))
+  ([error? params left-item]
+   [:div {:style {:display "flex" :flex 1}}
+    [:div {:class "ant-input-group-addon"
+           :style {:height "4rem"
+                   :width "6rem"
+                   :display "flex"
+                   :justify-content "center"
+                   :align-items "center"}}
+     left-item]
+    (ant/form-item (form-item-param error?)
+                   (ant/date-picker params))]))
 
 (defc button
   [params text]
@@ -58,7 +66,14 @@
                 text)))
 
 (defc time-picker
-  [error? params]
-  (ant/form-item (-> (form-item-param error?)
-                     (assoc-in [:style :margin-left] 20))
-                 (ant/time-picker params)))
+  [error? params left-item]
+  [:div {:style {:display "flex" :flex 1 :margin-left 20}}
+   [:div {:class "ant-input-group-addon"
+          :style {:height "4rem"
+                  :width "6rem"
+                  :display "flex"
+                  :justify-content "center"
+                  :align-items "center"}}
+    left-item]
+   (ant/form-item (form-item-param error?)
+                  (ant/time-picker params))])

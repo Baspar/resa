@@ -57,6 +57,11 @@
       (small-header store)
       ;; Title
       [:br]
+      [:div {:style {:font-size 9
+                     :color "white"
+                     :font-weight "bold"}}
+       "INFORMATION REQUIRED"]
+      [:br][:br]
       (input name-invalid?
              {:placeholder "Your name"
               :type "text"
@@ -79,13 +84,13 @@
               :on-change #(dispatch! store [:step2--set-email %])}
              (custom-icon "mail"))
       ;; Calendar
-      [:div {:style {:display "flex" :align-items "center" }}
+      [:div {:style {:display "flex" :align-items "center"}}
        (date-picker date-invalid?
                     {:on-change #(dispatch! store [:step2--set-date %])
                      :style {:width "100%"}
                      :value (when date (js/moment date))
                      :disabledDate disabledDate}
-                    #_(custom-icon "calendar"))
+                    (custom-icon "calendar"))
 
        (time-picker minutes-invalid?
                     {:on-change #(dispatch! store [:step2--set-time %])
@@ -98,7 +103,7 @@
                      ;; :value (when hour (.. js/window moment (set "hour" hour)))
                      :value (when (and hour minutes)
                               (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}
-                    #_(custom-icon "clock-circle-o"))]
+                    (custom-icon "clock-circle-o"))]
       ;; Number pax
       (input pax-invalid?
              {:type "number"
