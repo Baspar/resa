@@ -145,6 +145,7 @@
                  :background-color "rgba(84, 80, 64, 0.8)"
                  :color "#ffffff"
                  :font-size 14
+                 :margin "10px 0px 5px 0px"
                  :padding "10px 5px 10px 20px"
                  :font-weight "200"}}
    [:div
