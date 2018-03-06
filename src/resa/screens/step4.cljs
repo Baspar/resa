@@ -20,5 +20,4 @@
   [:div])
 
 (defc next-button
-  [state]
-  [:div])
+  [state])

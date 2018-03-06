@@ -111,21 +111,33 @@
               :min 1
               :value (or pax "")
               :on-change #(dispatch! store [:step2--set-pax %])}
-             (custom-icon "user"))
-      ;; Submit button
-      [:br]
-      (button {:htmlType "submit"
-               :style {:height "4em"}
-               :on-click submit-fn
-               :disabled disabled?
-               :type "primary"
-               :size "large"}
-              "REVIEW")]]))
+             (custom-icon "user"))]]))
 
 (defc navigation
   [state]
   [:div])
 
 (defc next-button
-  [state]
-  [:div "ta mere"])
+  [store]
+  (let [m @store
+        data (get m :data {})
+        {:keys [pax-invalid? name-invalid? phone-invalid? email-invalid? date-invalid? hour-invalid? minutes-invalid?]} data
+        disabled? (or pax-invalid?
+                      name-invalid?
+                      date-invalid?
+                      hour-invalid?
+                      minutes-invalid?
+                      phone-invalid?
+                      email-invalid?)
+        submit-fn (fn [e]
+                    (do
+                      (.stopPropagation e)
+                      (.preventDefault e)
+                      (when (not disabled?) (dispatch! store :step2--submit))))]
+    (button {:htmlType "submit"
+             :style {:height "4em"}
+             :on-click submit-fn
+             :disabled disabled?
+             :type "primary"
+             :size "large"}
+            "REVIEW")))

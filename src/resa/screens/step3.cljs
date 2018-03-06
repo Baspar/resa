@@ -9,8 +9,7 @@
 (defc screen3
   [store]
   (let [data (:data @store)
-        {:keys [pax time name phone email]} data
-        disabled? false]
+        {:keys [pax time name phone email]} data]
     [:div {:style {:display "flex"
                    :flex-direction "column"}}
      (small-header store)
@@ -20,19 +19,16 @@
       [:li "Phone: " (or phone "")]
       [:li "E-mail: " (or email "")]
       [:li "Date/time: " (or time "")]
-      [:li "N. of guests: " (or pax "")]]
-     [:br]
-     (button {:style {:height "4em"}
-              :on-click #(dispatch! store :go-forward)
-              :type "primary"
-              :size "large"
-              :disabled disabled?}
-             "SUBMIT")]))
+      [:li "N. of guests: " (or pax "")]]]))
 
 (defc navigation
   [state]
   [:div])
 
 (defc next-button
-  [state]
-  [:div])
+  [store]
+  (button {:style {:height "4em"}
+           :on-click #(dispatch! store :go-forward)
+           :type "primary"
+           :size "large"}
+          "SUBMIT"))
