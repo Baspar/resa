@@ -1,0 +1,42 @@
+/* resa CSS */
+.ant-input.disabled, .ant-time-picker-input[disabled] {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.ant-time-picker-input,
+.ant-calendar-picker-input,
+.ant-input {
+  border-radius: 0 5px 5px 0;
+}
+.ant-input, .ant-time-picker-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: solid 1px #979797;
+  height: 4rem;
+}
+.has-error .ant-input-group-addon {
+  background-color: rgba(124, 124, 124, 0.5);
+  border: solid 1px #f04134;
+}
+.ant-input-group-addon .ant-select-focused .ant-select-selection {
+  color: #908247;
+}
+.ant-input-group-addon {
+  background-color: rgba(124, 124, 124, 0.5);
+  border: solid 1px #979797;
+}
+.ant-input::placeholder {
+  color: #6b6b6b;
+}
+.ant-input:focus,
+.ant-input:hover {
+  border-color: #908247;
+  box-shadow: 0 0 0 2px rgba(144, 130, 71, 0.2);
+}
+
+#button-fake:active {
+  background-color: #cdbb66;
+}
+
+#main-app-area {
+ background: url("/images/background.png");
+}
