@@ -1,13 +1,11 @@
 (ns resa.components.header
   (:require [antizer.rum :as ant]
             [reaction.core :refer-macros [dispatch!]]
-            [rum.core :refer-macros [defc]]))
-
+            [rum.core :refer-macros [defc]]
 (def restaurant-info
   {:name "FANCY RESTAURANT NAME"
    :ratings "4.89 (488)"
    :location "SINGAPORE CBD"})
-
 (defn- header-s
   [store back-button?]
   [:div {:style {:background-color "#EEEEEE"
@@ -48,22 +46,23 @@
 
 (defc big-header
   [store]
-  [:div {:style {:background-color "#EEEEEE"
-                 :display "flex"
-                 :flex-direction "column"
-                 :border "solid grey 1px"
-                 :padding 10}}
-   [:div {:style {:display "flex"
-                  :flex-direction "row"
-                  :justify-content "flex-end"}}
-    [:div {:style {:font-size "0.7em"}}
-     "PHOOD"]]
-   [:div {:style {:font-size "2em"
-                  :font-weight "bold"}}
-    (:name restaurant-info)]
-   [:div {:style {:font-size "0.7em"}}
-    (ant/icon {:type "star"})
-    (:ratings restaurant-info)]
-   [:div {:style {:font-size "0.7em"}}
-    (ant/icon {:type "environment"})
-    (:location restaurant-info)]])
+  [:div
+    [:div {:style {:background-color "#EEEEEE"
+                   :display "flex"
+                   :flex-direction "column"
+                   :border "solid grey 1px"
+                   :padding 10}}
+     [:div {:style {:display "flex"
+                    :flex-direction "row"
+                    :justify-content "flex-end"}}
+      [:div {:style {:font-size "0.7em"}}
+       "PHOOD"]]
+     [:div {:style {:font-size "2em"
+                    :font-weight "bold"}}
+      (:name restaurant-info)]
+     [:div {:style {:font-size "0.7em"}}
+      (ant/icon {:type "star"})
+      (:ratings restaurant-info)]
+     [:div {:style {:font-size "0.7em"}}
+      (ant/icon {:type "environment"})
+      (:location restaurant-info)]]])
