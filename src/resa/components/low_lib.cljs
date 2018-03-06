@@ -19,3 +19,11 @@
     left-item
     [:input (-> params
                 (assoc-in [:style :flex] 1))]]))
+
+(defc select
+  [store]
+  [:select {:on-change #(dispatch! store [:step2--set-title %])
+            :default-value "Mr." }
+   [:option {:value "Mr."} "Mr."]
+   [:option {:value "Ms."} "Ms."]
+   [:option {:value "Mrs."} "Mrs"]])

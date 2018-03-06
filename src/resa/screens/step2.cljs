@@ -2,7 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
-            [resa.components.low-lib :refer [custom-icon input]]
+            [resa.components.med-lib :refer [custom-icon input select]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot ]]))
@@ -56,13 +56,14 @@
       ;; Title
       [:br]
       [:div {:style {:display "flex" :align-items "center" }}
-       (ant/form-item {}
-                      (ant/select {:default-value "Mr."
-                                   :style {:width "6rem"}
-                                   :on-change #(dispatch! store [:step2--set-title %])}
-                                  (ant/select-option {:value "Mr."} "Mr.")
-                                  (ant/select-option {:value "Mrs."} "Mrs.")
-                                  (ant/select-option {:value "Ms."} "Ms.")))
+       (select store)
+       ;; (ant/form-item {}
+       ;;                (ant/select {:default-value "Mr."
+       ;;                             :style {:width "6rem"}
+       ;;                             :on-change #(dispatch! store [:step2--set-title %])}
+       ;;                            (ant/select-option {:value "Mr."} "Mr.")
+       ;;                            (ant/select-option {:value "Mrs."} "Mrs.")
+       ;;                            (ant/select-option {:value "Ms."} "Ms.")))
        (input name-invalid?
               {:placeholder "Your name"
                :type "text"
