@@ -56,3 +56,10 @@
                     (assoc :type "primary")
                     (assoc :htmlType type))
                 text)))
+
+(defc time-picker
+  [error? params left-item]
+  [:div {:style {:display "flex" :align-items "center"}}
+   left-item
+   (ant/form-item (form-item-param error?)
+                  (ant/time-picker params))])
