@@ -27,3 +27,12 @@
    [:option {:value "Mr."} "Mr."]
    [:option {:value "Ms."} "Ms."]
    [:option {:value "Mrs."} "Mrs"]])
+
+(defc date-picker
+  [error? params left-item]
+  [:input (-> params
+              (update :on-change (fn [on-change]
+                                   (fn [js-date]
+                                     (let [moment-date (js/moment (.-value (.-target js-date)))]
+                                       (on-change moment-date)))))
+              (assoc :type "date"))])

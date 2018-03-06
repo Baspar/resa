@@ -2,7 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
-            [resa.components.hi-lib :refer [custom-icon input select]]
+            [resa.components.hi-lib :refer [custom-icon input select date-picker button]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -50,20 +50,20 @@
                                  (vec (clojure.set/difference totalMinute minutesAv))))]
 
     [:form {:on-submit submit-fn}
-     [:div {:style {:display "flex" :flex-direction "column"}}
+     [:div {:style {:display "flex"
+                    :flex-direction "column"
+                    :background-color "rgba(25,29,9,0.8)"}}
       ;; Header
       (small-header store)
       ;; Title
       [:br]
-      [:div {:style {:display "flex" :align-items "center" }}
-
-       (input name-invalid?
-              {:placeholder "Your name"
-               :type "text"
-               :auto-focus true
-               :value (or name "")
-               :on-change #(dispatch! store [:step2--set-name %])}
-              (select store))]
+      (input name-invalid?
+             {:placeholder "Your name"
+              :type "text"
+              :auto-focus true
+              :value (or name "")
+              :on-change #(dispatch! store [:step2--set-name %])}
+             (select store))
       ;; Phone number
       (input phone-invalid?
              {:placeholder "Your phone number"
@@ -80,12 +80,12 @@
              (custom-icon "mail"))
       ;; Calendar
       [:div {:style {:display "flex" :align-items "center" }}
-       (custom-icon "calendar")
-       (ant/form-item (form-item-param date-invalid? 2)
-                      (ant/date-picker {:on-change #(dispatch! store [:step2--set-date %])
-                                        :style {:width "100%"}
-                                        :value (when date (js/moment date))
-                                        :disabledDate disabledDate}))
+       (date-picker date-invalid?
+                    {:on-change #(dispatch! store [:step2--set-date %])
+                     :style {:width "100%"}
+                     :value (when date (js/moment date))
+                     :disabledDate disabledDate}
+                    (custom-icon "calendar"))
        (ant/form-item (form-item-param minutes-invalid?)
                       (ant/time-picker {:on-change #(dispatch! store [:step2--set-time %])
                                         :style {:width "100%"}
@@ -107,10 +107,10 @@
              (custom-icon "user"))
       ;; Submit button
       [:br]
-      (ant/button {:htmlType "submit"
-                   :style {:height "4em"}
-                   :on-click submit-fn
-                   :disabled disabled?
-                   :type "primary"
-                   :size "large"}
-                  "REVIEW")]]))
+      (button {:htmlType "submit"
+               :style {:height "4em"}
+               :on-click submit-fn
+               :disabled disabled?
+               :type "primary"
+               :size "large"}
+              "REVIEW")]]))

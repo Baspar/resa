@@ -37,3 +37,22 @@
               (ant/select-option {:value "Mr."} "Mr.")
               (ant/select-option {:value "Mrs."} "Mrs.")
               (ant/select-option {:value "Ms."} "Ms.")))
+
+(defc date-picker
+  ([error? params left-item]
+   [:div {:style {:display "flex" :align-items "center"}}
+    left-item
+    (ant/form-item (form-item-param error?)
+                   (ant/date-picker params))]))
+
+(defc button
+  [params text]
+  (let [type (get params :type)]
+    (ant/button (-> params
+                    (assoc-in [:style :backgroundColor] "#908247")
+                    (assoc-in [:style :border] "none")
+                    (assoc-in [:style :font-weight] "bold")
+                    (assoc-in [:style :height] "45px")
+                    (assoc :type "primary")
+                    (assoc :htmlType type))
+                text)))

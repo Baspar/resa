@@ -2,6 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
+            [resa.components.med-lib :refer [button]]
             [antizer.rum :as ant]
             [rum.core :as rum]))
 
@@ -21,9 +22,9 @@
       [:li "Date/time: " (or time "")]
       [:li "N. of guests: " (or pax "")]]
      [:br]
-     (ant/button {:style {:height "4em"}
-                  :on-click #(dispatch! store :go-forward)
-                  :type "primary"
-                  :size "large"
-                  :disabled disabled?}
-                 "SUBMIT")]))
+     (button {:style {:height "4em"}
+              :on-click #(dispatch! store :go-forward)
+              :type "primary"
+              :size "large"
+              :disabled disabled?}
+             "SUBMIT")]))
