@@ -11,3 +11,12 @@
      "["
      (clojure.string/upper-case (first icon-name))
      "]")])
+
+
+(defc select
+  [store]
+  [:select {:on-change #(dispatch! store [:step2--set-title %])
+            :default-value "Mr." }
+   [:option {:value "Mr."} "Mr."]
+   [:option {:value "Ms."} "Ms."]
+   [:option {:value "Mrs."} "Mrs"]])

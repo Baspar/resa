@@ -16,3 +16,13 @@
   [error? params]
   (ant/form-item (form-item-param error?)
                  (ant/input params)))
+
+(defc select
+  [store]
+  (ant/form-item {}
+                 (ant/select {:default-value "Mr."
+                              :style {:width "6rem"}
+                              :on-change #(dispatch! store [:step2--set-title %])}
+                             (ant/select-option {:value "Mr."} "Mr.")
+                             (ant/select-option {:value "Mrs."} "Mrs.")
+                             (ant/select-option {:value "Ms."} "Ms."))))
