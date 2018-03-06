@@ -25,7 +25,6 @@
    (ant/form-item (form-item-param error?)
                   (ant/input (-> params
                                  (assoc :addon-before left-item)
-                                 (assoc-in [:style :border-radius] 0)
                                  (assoc-in [:style :width] "100%")
                                  (assoc-in [:style :color] "#6b6b6b")
                                  (assoc-in [:style :font-size] "16px"))))))
