@@ -2,6 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
+            [resa.components.med-lib :refer [custom-icon input]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot ]]))
@@ -10,10 +11,6 @@
   [current]
   (let [data (if current (get available-slot  (.format current "YYYY-MM-DD") nil))]
     (empty? data)))
-
-(defc custom-icon
-  [icon-name]
-  (ant/icon {:type icon-name :style {:width "6rem" :margin-bottom 24}}))
 
 (defc screen2
   [store]
@@ -66,19 +63,18 @@
                                   (ant/select-option {:value "Mr."} "Mr.")
                                   (ant/select-option {:value "Mrs."} "Mrs.")
                                   (ant/select-option {:value "Ms."} "Ms.")))
-       (ant/form-item (form-item-param name-invalid?)
-                      (ant/input {:placeholder "Your name"
-                                  :type "text"
-                                  :auto-focus true
-                                  :value (or name "")
-                                  :on-change #(dispatch! store [:step2--set-name %])}))]
+       (input name-invalid?
+              {:placeholder "Your name"
+               :type "text"
+               :auto-focus true
+               :value (or name "")
+               :on-change #(dispatch! store [:step2--set-name %])})]
       ;; Phone number
       [:div {:style {:display "flex" :align-items "center" }}
        (custom-icon "phone")
        (ant/form-item (form-item-param phone-invalid?)
                       (ant/input {:placeholder "Your phone number"
                                   :type "tel"
-                                  :style {:flex 1}
                                   :value (or phone "")
                                   :on-change #(dispatch! store [:step2--set-phone %])}))]
       ;; Email
