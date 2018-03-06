@@ -1,6 +1,5 @@
 (ns resa.components.low-lib
-  (:require [antizer.rum :as ant]
-            [reaction.core :refer-macros [dispatch!]]
+  (:require [reaction.core :refer-macros [dispatch!]]
             [rum.core :refer-macros [defc]]))
 
 (defc custom-icon
@@ -11,3 +10,12 @@
      "["
      (clojure.string/upper-case (first icon-name))
      "]")])
+
+(defc input
+  ([error? params]
+   (input error? params nil))
+  ([error? params left-item]
+   [:div {:style {:display "flex" :align-items "center" :flex 1}}
+    left-item
+    [:input (-> params
+                (assoc-in [:style :flex] 1))]]))

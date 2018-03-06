@@ -2,7 +2,7 @@
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
             [resa.components.header :refer [small-header]]
-            [resa.components.med-lib :refer [custom-icon input]]
+            [resa.components.low-lib :refer [custom-icon input]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot ]]))
@@ -70,22 +70,19 @@
                :value (or name "")
                :on-change #(dispatch! store [:step2--set-name %])})]
       ;; Phone number
-      [:div {:style {:display "flex" :align-items "center" }}
-       (custom-icon "phone")
-       (ant/form-item (form-item-param phone-invalid?)
-                      (ant/input {:placeholder "Your phone number"
-                                  :type "tel"
-                                  :value (or phone "")
-                                  :on-change #(dispatch! store [:step2--set-phone %])}))]
+      (input phone-invalid?
+             {:placeholder "Your phone number"
+              :type "tel"
+              :value (or phone "")
+              :on-change #(dispatch! store [:step2--set-phone %])}
+             (custom-icon "phone"))
       ;; Email
-      [:div {:style {:display "flex" :align-items "center" }}
-       (custom-icon "mail")
-       (ant/form-item (form-item-param email-invalid?)
-                      (ant/input {:placeholder "Your e-mail"
-                                  :type "email"
-                                  :value (or email "")
-                                  :style {:flex 1}
-                                  :on-change #(dispatch! store [:step2--set-email %])}))]
+      (input email-invalid?
+             {:placeholder "Your e-mail"
+              :type "email"
+              :value (or email "")
+              :on-change #(dispatch! store [:step2--set-email %])}
+             (custom-icon "mail"))
       ;; Calendar
       [:div {:style {:display "flex" :align-items "center" }}
        (custom-icon "calendar")
@@ -106,15 +103,13 @@
                                         :value (when (and hour minutes)
                                                  (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}))]
       ;; Number pax
-      [:div {:style {:display "flex" :align-items "center" }}
-       (custom-icon "user")
-       (ant/form-item (form-item-param pax-invalid?)
-                      (ant/input {:type "number"
-                                  :placeholder "Number of guests"
-                                  :min 1
-                                  :style {:flex 1}
-                                  :value (or pax "")
-                                  :on-change #(dispatch! store [:step2--set-pax %])}))]
+      (input pax-invalid?
+             {:type "number"
+              :placeholder "Number of guests"
+              :min 1
+              :value (or pax "")
+              :on-change #(dispatch! store [:step2--set-pax %])}
+             (custom-icon "user"))
       ;; Submit button
       [:br]
       (ant/button {:htmlType "submit"
