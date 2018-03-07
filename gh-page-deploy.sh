@@ -16,8 +16,7 @@ git checkout gh-pages
 echo "Preparing repo..."
 rm -rf images/ css/ js/ index.html card.html
 mv $path/* .
-mv resa/images/ .
-rm -rf resa/
+# mv resa/images/ .
 rm -rf js/compiled/out
 echo "Do you wanna do an automatic commit and push to gh-pages branches ? [y/n] (default: no)"
 read answer
