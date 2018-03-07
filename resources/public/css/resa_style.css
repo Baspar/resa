@@ -9,12 +9,9 @@
 }
 .ant-input, .ant-time-picker-input {
   background-color: rgba(255, 255, 255, 0.1);
-  color: black;
+  color: white;
   border: solid 1px #979797;
   height: 4rem;
-}
-.hi-lib .ant-input, .hi-lib .ant-time-picker-input {
-  color: white;
 }
 .has-error .ant-input-group-addon {
   background-color: rgba(124, 124, 124, 0.5);
@@ -26,6 +23,9 @@
 .ant-input-group-addon {
   background-color: rgba(124, 124, 124, 0.5);
   border: solid 1px #979797;
+}
+.ant-input::placeholder {
+  color: #6b6b6b;
 }
 .ant-input:focus,
 .ant-input:hover {

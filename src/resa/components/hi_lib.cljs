@@ -23,7 +23,7 @@
   ([error? params]
    (input error? params nil))
   ([error? params left-item]
-   [:div.hi-lib {:style {:display "flex" :flex 1}}
+   [:div {:style {:display "flex" :flex 1}}
     [:div {:class "ant-input-group-addon"
            :style {:height "4rem"
                    :width "6rem"
