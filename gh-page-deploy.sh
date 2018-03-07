@@ -2,6 +2,15 @@
 PROJ_PATH="/tmp/tmp_build"
 PROJ_BUILD="resources/public/*"
 
+dialog () {
+    TEXT="# $1 #"
+    BORDER=`echo $TEXT | sed 's/./#/g'`
+    echo "$BORDER"
+    echo "$TEXT"
+    echo "$BORDER"
+    echo ""
+}
+
 
 if curl -s localhost:3450 >> /dev/null
 then
@@ -9,26 +18,39 @@ then
     exit 1
 fi
 
-echo "Please chose en environment to build [dev/prod] (default: prod)"
+dialog "Please chose en environment to build [dev/prod] (default: prod)"
 read envBuild
 if [[ $envBuild != "build" || $envBuild != "prod" ]]
 then
     envBuild="prod"
 fi
 
-lein clean && lein cljsbuild once $envBuild
+dialog "Cleaning"
+lein clean || {
+    dialog "Can't clean"
+    exit 1
+}
+
+dialog "Building"
+lein cljsbuild once $envBuild || {
+    dialog "Can't build"
+    exit 1
+}
 rm -rf $PROJ_PATH
 mkdir -p $PROJ_PATH
 cp -r $PROJ_BUILD $PROJ_PATH
-git checkout gh-pages
+git checkout gh-pages || {
+    dialog "Can't checkout to gh-pages"
+    exit 1
+}
 
-echo "Preparing repo..."
+dialog "Preparing repo..."
 git rm -rf *
 rm -rf *
 mv $PROJ_PATH/* .
 
 # rm -rf js/compiled/out
-echo "Do you wanna do an automatic commit and push to gh-pages branches ? [y/n] (default: no)"
+dialog "Do you wanna do an automatic commit and push to gh-pages branches ? [y/n] (default: no)"
 read answer
 # if [[ $answer == "yes" ]]
 # then
@@ -38,4 +60,4 @@ read answer
 #     git checkout master
 # fi
 #
-echo "Done."
+dialog "Done."
