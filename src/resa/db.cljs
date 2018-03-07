@@ -12,7 +12,7 @@
 
   (->> (range 60)
        (take-nth 15)
-       (filterv  #(< (rand) (/ 1 (+ 1 (.exp js/Math (/ prob -3))))))
+       (filterv  #(< (rand) (/ 1 (+ 1 (.exp js/Math (- 6 prob))))))
        (assoc {} a )))
 
 (def available-slot
