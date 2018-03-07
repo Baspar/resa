@@ -3,7 +3,7 @@
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.components.low-lib :refer [small-header navigation]]))
+            [resa.components.low-lib :refer [mode small-header navigation]]))
 
 (defc screen4
   [store]
@@ -13,9 +13,9 @@
                    :flex-direction "column"}}
      (small-header store)
      [:br]
-     [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
+     [:div {:style {:background-color (when (= mode "hi") "rgba(0, 0, 0, 0.8)")
                     :padding 20
-                    :color "white"
+                    :color (when (= mode "hi") "white")
                     :font-weight "bold"
                     :flex 1}}
       [:p "Booking request is successful."]

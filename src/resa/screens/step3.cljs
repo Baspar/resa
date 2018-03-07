@@ -1,7 +1,7 @@
 (ns resa.screens.step3
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.low-lib :refer [small-header navigation button]]
+            [resa.components.low-lib :refer [mode small-header navigation button]]
             [antizer.rum :as ant]
             [rum.core :as rum]))
 
@@ -12,10 +12,10 @@
     [:div {:style {:display "flex"
                    :flex-direction "column"
                    :flex 1
-                   :color "white"}}
+                   :color (when (= mode "hi") "white")}}
      (small-header store)
      [:br]
-     [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
+     [:div {:style {:background-color (when (= mode "hi") "rgba(0, 0, 0, 0.8)")
                     :padding 20
                     :font-weight "bold"
                     :flex 1}}

@@ -1,7 +1,7 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.low-lib :refer [custom-icon input select date-picker time-picker button small-header navigation]]
+            [resa.components.low-lib :refer [mode custom-icon input select date-picker time-picker button small-header navigation]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -55,11 +55,11 @@
       ;; Header
       (small-header store)
       [:br]
-      [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
+      [:div {:style {:background-color (when (= mode "hi") "rgba(0, 0, 0, 0.8)")
                      :padding 20}}
        ;; Title
        [:div {:style {:font-size 9
-                      :color "white"
+                      :color (when (= mode "hi") "white")
                       :font-weight "bold"}}
         "INFORMATION REQUIRED"]
 
