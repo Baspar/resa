@@ -48,15 +48,7 @@
                (assoc :type "date"))]])
 
 (defc time-picker
-  [error? params left-item store]
-  [:display {:style {:display "flex" :flex 1}}
-   left-item
-   [:select
-    (->> (range 24)
-         (map #(-> [:option %])))]
-   [:select
-    (->> [0 15 30 45]
-         (map #(-> [:option %])))]])
+  [error? params left-item store])
 
 (defc text-home
   [_]

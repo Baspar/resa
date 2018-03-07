@@ -1,7 +1,7 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.hi-lib :refer [mode custom-icon input select date-picker time-picker button small-header navigation]]
+            [resa.components.low-lib :refer [mode custom-icon input select date-picker time-picker button small-header navigation]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))

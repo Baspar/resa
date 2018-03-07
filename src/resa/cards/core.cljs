@@ -8,27 +8,3 @@
     [resa.screens.step4 :refer [screen4]])
   (:require-macros
     [devcards.core :as dc :refer [defcard]]))
-
-(defcard screen1
-  (fn [store]
-    (screen1 store))
-  {}
-  {:inspect-data true})
-
-(defcard screen2
-  (fn [store]
-    (screen2 store))
-  {}
-  {:inspect-data true})
-
-(defcard screen3
-  (fn [store]
-    (screen3 store))
-  {}
-  {:inspect-data true})
-
-(defcard screen4
-  (fn [store]
-    (screen4 store))
-  {}
-  {:inspect-data true})
