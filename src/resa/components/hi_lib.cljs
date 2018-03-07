@@ -103,7 +103,7 @@
                 :style {:font-size 20
                         :transition "opacity .3s"
                         :opacity (if disabled? 0 1)}})
-     [:img {:src "./images/logo-phood.svg"}]]))
+     [:img {:src "/resa/images/logo-phood.svg"}]]))
 
 ;; Header
 (def big-title-text-style {:color "#ffffff"

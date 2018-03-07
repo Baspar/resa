@@ -13,15 +13,14 @@ rm -rf $path
 mkdir -p $path
 cp -r $build $path
 git checkout gh-pages
-echo "Cleaning repo..."
+echo "Preparing repo..."
 rm -rf images/ css/ js/ index.html card.html
-echo "Adding some files..."
 mv $path/* .
-echo "Mopping the floor..."
+# mv resa/images/ .
 rm -rf js/compiled/out
 echo "Do you wanna do an automatic commit and push to gh-pages branches ? [y/n] (default: no)"
 read answer
-if [[ $answer == "yes"]]
+if [[ $answer == "yes" ]]
 then
     git add --all
     git commit -am "automatic deployement on gh-pages"
