@@ -1,7 +1,7 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.hi-lib :refer [mode custom-icon input select date-picker time-picker button small-header navigation]]
+            [resa.components.low-lib :refer [mode custom-icon input select date-picker time-picker button small-header navigation]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -105,7 +105,8 @@
                       ;; :value (when hour (.. js/window moment (set "hour" hour)))
                       :value (when (and hour minutes)
                                (.. js/window moment (set "hour" hour) (set "minutes" minutes)))}
-                     (custom-icon "clock-circle-o"))]
+                     (custom-icon "clock-circle-o")
+                     store)]
        ;; Number pax
        (input pax-invalid?
               {:type "number"

@@ -49,7 +49,7 @@
   (ant/button params text))
 
 (defc time-picker
-  [error? params left-item]
+  [error? params left-item _]
   [:div {:style {:display "flex" :align-items "center"}}
    left-item
    (ant/form-item (form-item-param error?)

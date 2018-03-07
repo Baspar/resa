@@ -74,7 +74,7 @@
                 text)))
 
 (defc time-picker
-  [error? params left-item]
+  [error? params left-item _]
   [:div {:style {:display "flex" :flex 1 :margin-left 20}}
    [:div {:class "ant-input-group-addon"
           :style {:height "4rem"

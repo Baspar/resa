@@ -47,7 +47,7 @@
                (assoc :type "date"))]])
 
 (defc time-picker
-  [error? params left-item])
+  [error? params left-item store])
 
 (defc text-home
   [_]
