@@ -9,10 +9,12 @@ fi
 lein clean && lein cljsbuild once $envBuild
 path="/tmp/tmp_build"
 build="resources/public/*"
+rm -rf $path
 mkdir -p $path
 cp -r $build $path
 git checkout gh-pages
-cp -r $path/* .
+mv $path/* .
+rm -rf js/compiled/out
 echo "Do you wanna do an automatic commit and push to gh-pages branches ? [y/n] (default: no)"
 read answer
 if [[ $answer == "yes"]]
