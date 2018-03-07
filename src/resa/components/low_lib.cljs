@@ -37,12 +37,14 @@
 
 (defc date-picker
   [error? params left-item]
-  [:input (-> params
-              (update :on-change (fn [on-change]
-                                   (fn [js-date]
-                                     (let [moment-date (js/moment (.-value (.-target js-date)))]
-                                       (on-change moment-date)))))
-              (assoc :type "date"))])
+  [:div {:style {:display "flex" :flex 1}}
+   left-item
+   [:input (-> params
+               (update :on-change (fn [on-change]
+                                    (fn [js-date]
+                                      (let [moment-date (js/moment (.-value (.-target js-date)))]
+                                        (on-change moment-date)))))
+               (assoc :type "date"))]])
 
 (defc time-picker
   [error? params left-item])
