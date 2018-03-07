@@ -1,5 +1,6 @@
 (ns resa.components.low-lib
   (:require [reaction.core :refer-macros [dispatch!]]
+            [antizer.rum :as ant]
             [rum.core :refer-macros [defc]]))
 
 (defc custom-icon
@@ -52,8 +53,35 @@
 (defc text-home
   [_]
   [:div {:style {:padding 11}} "An eclectic and authentic Northern French cuisine. Superb ambiance, suitable for romantic and business dinner. Lorem ipsum  it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."])
-
-(defc big-header [_])
+(def restaurant-info
+  {:name "FANCY RESTAURANT NAME"
+   :ratings "4.89 (488)"
+   :location "SINGAPORE CBD"})
+(defc big-header
+  [store]
+  [:div
+   [:div {:style {:background-color "#EEEEEE"
+                  :display "flex"
+                  :flex-direction "column"
+                  :border "solid grey 1px"
+                  :padding 10}}
+    [:div {:style {:display "flex"
+                   :flex-direction "row"
+                   :justify-content "flex-end"}}
+     [:div {:style {:font-size "0.7em"}}
+      "PHOOD"]]
+    [:div {:style {:font-size "2em"
+                   :font-weight "bold"}}
+     (:name restaurant-info)]
+    [:div {:style {:font-size "0.7em"}}
+     (ant/icon {:type "star"})
+     (:ratings restaurant-info)]
+    [:div {:style {:font-size "0.7em"}}
+     (ant/icon {:type "environment"})
+     (:location restaurant-info)]]
+   (ant/button {:style {:flex 1 :height "4em"}} "Info")
+   (ant/button {:style {:flex 1 :height "4em"}} "Menu")
+   (ant/button {:style {:flex 1 :height "4em"}} "Review")])
 (defc small-header [_])
 
 (def mode "low")
