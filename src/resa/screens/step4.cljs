@@ -3,7 +3,7 @@
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.components.hi-lib :refer [small-header navigation]]))
+            [resa.components.low-lib :refer [small-header navigation]]))
 
 (defc screen4
   [store]
@@ -16,9 +16,11 @@
      [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
                     :padding 20
                     :color "white"
+                    :font-weight "bold"
                     :flex 1}}
-      [:p "Dear MM. " (or name "")]
-      [:p "Thank you for your reservation!"]
+      [:p "Booking request is successful."]
+
+      [:p "A representative from Fancy Restaurant Name will call you to confirm your reservation a day before  your reservation date"]
       [:p "A confirmation e-mail has been sent to: " (or email "")]]]))
 
 (defc nav

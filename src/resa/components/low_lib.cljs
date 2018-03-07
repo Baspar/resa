@@ -44,7 +44,8 @@
                                        (on-change moment-date)))))
               (assoc :type "date"))])
 
-;; text home
+(defc time-picker
+  [error? params left-item])
 
 (defc text-home
   [_]
@@ -52,3 +53,5 @@
 
 (defc big-header [_])
 (defc small-header [_])
+
+(def mode "low")
