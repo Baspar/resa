@@ -1,7 +1,7 @@
 (ns resa.screens.step2
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.hi-lib :refer [custom-icon input select date-picker time-picker button small-header navigation]]
+            [resa.components.low-lib :refer [custom-icon input select date-picker time-picker button small-header navigation]]
             [antizer.rum :as ant]
             [rum.core :as rum]
             [resa.db :refer [available-slot]]))
@@ -15,7 +15,7 @@
   [store]
   (let [m @store
         data (get m :data {})
-        {:keys [pax hour minutes name phone email date]} data
+        {:keys [pax hour minutes name title phone email date]} data
         {:keys [pax-invalid? name-invalid? phone-invalid? email-invalid? date-invalid? hour-invalid? minutes-invalid?]} data
         disabled? (or pax-invalid?
                       name-invalid?

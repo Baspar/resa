@@ -1,7 +1,7 @@
 (ns resa.screens.step3
   (:require [rum.core :refer-macros [defc]]
             [reaction.core :refer-macros [dispatch!]]
-            [resa.components.hi-lib :refer [small-header navigation button]]
+            [resa.components.low-lib :refer [small-header navigation button]]
             [antizer.rum :as ant]
             [rum.core :as rum]))
 
@@ -17,9 +17,12 @@
      [:br]
      [:div {:style {:background-color "rgba(0, 0, 0, 0.8)"
                     :padding 20
+                    :font-weight "bold"
                     :flex 1}}
+      [:div "Please check if booking details are correct"]
+      [:br]
       [:ul
-       [:li (or title "") (or name "")]
+       [:li (or title "Mr.") (or name "")]
        [:li "Mobile: " (or phone "")]
        [:li "E-mail: " (or email "")]
        [:li "Date/time: "
@@ -28,7 +31,7 @@
         (or hour "")
         ":"
         (or minutes "")]
-       [:li "N. of guests: " (or pax "")]]]]))
+       [:li "For: " (or pax "")]]]]))
 
 (defc nav
   [state]
