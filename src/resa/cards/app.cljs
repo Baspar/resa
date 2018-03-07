@@ -5,8 +5,8 @@
   (:require-macros
     [devcards.core :as dc :refer [defcard]]))
 
-;; (defcard app
-;;   (fn [store]
-;;     (ui-screen store))
-;;   {}
-;;   {:inspect-data true})
+(defcard app
+  (fn [store]
+    (ui-screen store))
+  {}
+  {:inspect-data true})

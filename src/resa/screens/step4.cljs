@@ -3,7 +3,7 @@
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.components.low-lib :refer [mode small-header navigation]]))
+            [resa.components.hi-lib :refer [mode small-header navigation]]))
 
 (defc screen4
   [store]

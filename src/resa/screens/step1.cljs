@@ -3,7 +3,7 @@
             [reaction.core :refer-macros [dispatch!]]
             [antizer.rum :as ant]
             [rum.core :as rum]
-            [resa.components.low-lib :refer [big-header navigation button text-home]]))
+            [resa.components.hi-lib :refer [big-header navigation button text-home]]))
 
 (defc screen1
   [store]
