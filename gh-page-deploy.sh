@@ -48,8 +48,8 @@ dialog "Preparing repo..."
 git rm -rf *
 rm -rf *
 mv $PROJ_PATH/* .
+mv resa/images images
 
-# rm -rf js/compiled/out
 dialog "Do you wanna do an automatic commit and push to gh-pages branches ? [y/n] (default: no)"
 read answer
 # if [[ $answer == "yes" ]]
