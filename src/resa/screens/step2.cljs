@@ -8,8 +8,11 @@
 
 (defn disabledDate
   [current]
-  (let [data (if current (get available-slot  (.format current "YYYY-MM-DD") nil))]
-    (empty? data)))
+  (let [data (when current (get available-slot (.format current "YYYY-MM-DD")))]
+    (->> data
+         vals
+         (mapcat identity)
+         empty?)))
 
 (defc screen2
   [store]
@@ -34,7 +37,7 @@
                             (.preventDefault e)
                             (when (not disabled?) (dispatch! store :step2--submit))))
         disabledHours (fn [] (if date
-                               (let [totalHours (into #{} (range 1 23))
+                               (let [totalHours (into #{} (range 0 24))
                                      hours (->> (get available-slot date)
                                                 (keep (fn [[k v]]
                                                         (when (not (empty? v))
@@ -48,8 +51,10 @@
                                                            []))]
                                  (vec (clojure.set/difference totalMinute minutesAv))))]
 
-    [:form {:on-submit submit-fn}
-     [:input {:style {:display "none"}:type "submit"}]
+    [:form {:on-submit submit-fn
+            :style {:width "100%"}}
+     [:input {:style {:display "none"}
+              :type "submit"}]
      [:div {:style {:display "flex"
                     :flex-direction "column"}}
       ;; Header
