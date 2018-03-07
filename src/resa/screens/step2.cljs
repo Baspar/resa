@@ -89,7 +89,7 @@
        [:div {:style {:display "flex" :align-items "center"}}
         (date-picker date-invalid?
                      {:on-change #(dispatch! store [:step2--set-date %])
-                      :style {:width "100%"}
+                      :style {:flex 1}
                       :value (when date (js/moment date))
                       :disabledDate disabledDate}
                      (custom-icon "calendar"))
