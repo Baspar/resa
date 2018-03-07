@@ -34,7 +34,8 @@
     (ant/form-item (form-item-param error?)
                    (ant/input (-> params
                                   (assoc-in [:style :width] "100%")
-                                  (assoc-in [:style :color] "#6b6b6b")
+                                  ;; (assoc-in [:style :color] "#6b6b6b")
+                                  (assoc-in [:style :color] "white")
                                   (assoc-in [:style :font-size] "16px"))))]))
 
 (defc select
