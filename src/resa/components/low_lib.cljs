@@ -53,3 +53,5 @@
 
 (defc big-header [_])
 (defc small-header [_])
+
+(def mode "low")
