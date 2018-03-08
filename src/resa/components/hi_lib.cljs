@@ -64,14 +64,18 @@
 (defc button
   [params text]
   (let [type (get params :type)]
-    (ant/button (-> params
-                    (assoc-in [:style :backgroundColor] "#908247")
-                    (assoc-in [:style :border] "none")
-                    (assoc-in [:style :font-weight] "bold")
-                    (assoc-in [:style :height] "45px")
-                    (assoc :type "primary")
-                    (assoc :htmlType type))
-                text)))
+    [:div {:style {:padding 5
+                   :width "100%"
+                   :background-color "rgba(0, 0, 0, 0.8)"}}
+     (ant/button (-> params
+                     (assoc-in [:style :width] "100%")
+                     (assoc-in [:style :backgroundColor] "#908247")
+                     (assoc-in [:style :border] "none")
+                     (assoc-in [:style :font-weight] "bold")
+                     (assoc-in [:style :height] "45px")
+                     (assoc :type "primary")
+                     (assoc :htmlType type))
+                 text)]))
 
 (defc time-picker
   [error? params left-item _]
