@@ -60,11 +60,7 @@
 (defc big-header
   [store]
   [:div
-   [:div {:style {:background-color "#EEEEEE"
-                  :display "flex"
-                  :flex-direction "column"
-                  :border "solid grey 1px"
-                  :padding 10}}
+   [:div {:style {}}
     [:div {:style {:display "flex"
                    :flex-direction "row"
                    :justify-content "flex-end"}}
@@ -73,15 +69,15 @@
     [:div {:style {:font-size "2em"
                    :font-weight "bold"}}
      (:name restaurant-info)]
-    [:div {:style {:font-size "0.7em"}}
-     (ant/icon {:type "star"})
+    [:div {:style {:font-size "0.7em" :display "flex"}}
+     (custom-icon "star")
      (:ratings restaurant-info)]
-    [:div {:style {:font-size "0.7em"}}
-     (ant/icon {:type "environment"})
+    [:div {:style {:font-size "0.7em" :display "flex"}}
+     (custom-icon "environment")
      (:location restaurant-info)]]
-   (ant/button {:style {:flex 1 :height "4em"}} "Info")
-   (ant/button {:style {:flex 1 :height "4em"}} "Menu")
-   (ant/button {:style {:flex 1 :height "4em"}} "Review")])
+   [:button "Info"]
+   [:button "Menu"]
+   [:button "Review"]])
 (defc small-header [_])
 
 (def mode "low")
