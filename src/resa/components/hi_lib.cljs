@@ -64,7 +64,7 @@
 (defc button
   [params text]
   (let [type (get params :type)]
-    [:div {:style {:padding 5
+    [:div {:style {:padding 10
                    :width "100%"
                    :background-color "rgba(0, 0, 0, 0.8)"}}
      (ant/button (-> params
