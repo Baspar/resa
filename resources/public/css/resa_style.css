@@ -38,5 +38,6 @@
 }
 
 #main-app-area {
- background: url("/resa/images/background.png");
+  background-color: grey;
+  /* background: url("/resa/images/background.png"); */
 }
